@@ -37,7 +37,6 @@ public class Controller extends Control {
     private boolean isWhite; // True if player plays White
     public static StockfishClient client = null;
 
-
     public Controller(boolean isWhite) {
         this.isWhite = isWhite;
         setSkin(new ControllerSkin(this));
@@ -89,9 +88,8 @@ public class Controller extends Control {
         Node source = (Node) event.getSource();
         Integer colIndex = GridPane.getColumnIndex(source);
         Integer rowIndex = GridPane.getRowIndex(source);
-
-        colIndex = colIndex == null ? 0 : colIndex;
-        rowIndex = rowIndex == null ? 0 : rowIndex;
+        double x = event.getX();
+        double y = event.getY();
 
         log.info(event);
         if (isFirstClick) {
