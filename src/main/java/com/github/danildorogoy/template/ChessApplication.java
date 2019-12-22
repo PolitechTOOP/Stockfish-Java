@@ -27,7 +27,13 @@ public class ChessApplication extends Application {
 
 	public static StockfishClient client = null;
 
-	// overridden init method
+	private StackPane sp_mainlayout; // layout which allows items to be positioned on top of each other
+	private CustomControl cc_custom; // control which has a board and detects mouse and keyboard events
+	private Controller controller;
+
+	// entry point into our program to launch our JavaFX application
+	public static void main(String[] args) { launch(args); }
+
 	@Override
 	public void init() throws Exception{
 		// initialize the layout, create a CustomControl and it to the layout
@@ -46,8 +52,7 @@ public class ChessApplication extends Application {
 
 		}
 	}
-	
-	// overridden start method
+
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		// set the title and scene, and show the stage
@@ -72,7 +77,6 @@ public class ChessApplication extends Application {
 		primaryStage.show();
 	}
 
-	// overridden stop method
 	@Override
 	public void stop() {
 		log.info("Close");
@@ -80,12 +84,4 @@ public class ChessApplication extends Application {
 			client.close();
 		}
 	}
-	
-	// entry point into our program to launch our JavaFX application
-	public static void main(String[] args) { launch(args); }
-
-	// private fields for this class
-	private StackPane sp_mainlayout;	//layout which allows items to be positioned on top of each other
-	private CustomControl cc_custom;	//control which has a board and detects mouse and keyboard events
-	private Controller controller;
 }
