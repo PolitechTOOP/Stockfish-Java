@@ -252,7 +252,7 @@ public class ChessBoard extends Pane {
 	}
 	
 	// select piece method
-	public void selectPiece(final double x, final double y){
+	public void selectPiece(final double x, final double y) {
 		int indexX = (int) (x/ cell_width);
 		int indexY = (int) (y/ cell_height);
 		
