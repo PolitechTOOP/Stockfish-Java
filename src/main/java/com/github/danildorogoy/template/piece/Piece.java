@@ -1,5 +1,7 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.template.piece;
 
+import com.github.danildorogoy.template.board.ChessBoard;
+import com.github.danildorogoy.template.GameLogic;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -40,7 +42,7 @@ public abstract class Piece extends Group {
         this.xPos = xPos;
         this.yPos = yPos;
         isFirstTime = true;
-        setOnMouseClicked();
+//        setOnMouseClicked();
     }
 
     // Select method: When a piece is selected by a first click
@@ -210,5 +212,67 @@ public abstract class Piece extends Group {
         return this.yPos;
     }
 
+    public int getType() {
+        return type;
+    }
 
+    public int getxPos() {
+        return xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    public Translate getPos() {
+        return pos;
+    }
+
+    public GameLogic getGameLogic() {
+        return gameLogic;
+    }
+
+    public boolean isASavior() {
+        return isASavior;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public void setxPos(int xPos) {
+        this.xPos = xPos;
+    }
+
+    public void setyPos(int yPos) {
+        this.yPos = yPos;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
+    }
+
+    public void setPos(Translate pos) {
+        this.pos = pos;
+    }
+
+    public void setGameLogic(GameLogic gameLogic) {
+        this.gameLogic = gameLogic;
+    }
+
+    public void setASavior(boolean ASavior) {
+        isASavior = ASavior;
+    }
 }

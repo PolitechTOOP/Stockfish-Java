@@ -1,4 +1,4 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.controller;
 
 import javafx.scene.control.Skin;
 import javafx.scene.control.SkinBase;

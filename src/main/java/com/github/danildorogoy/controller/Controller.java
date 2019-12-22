@@ -1,15 +1,11 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.controller;
 
-import com.github.danildorogoy.models.ChessPiece;
-import com.github.danildorogoy.models.Square;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import com.github.danildorogoy.ChessApplication;
+import com.github.danildorogoy.template.board.ChessBoard;
+import com.github.danildorogoy.template.board.StatusBar;
 import javafx.scene.Node;
 import javafx.scene.control.Control;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.apache.commons.logging.Log;
@@ -18,7 +14,7 @@ import xyz.niflheim.stockfish.engine.StockfishClient;
 import xyz.niflheim.stockfish.engine.enums.Query;
 import xyz.niflheim.stockfish.engine.enums.QueryType;
 import xyz.niflheim.stockfish.exceptions.StockfishInitException;
-import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -33,7 +29,6 @@ public class Controller extends Control {
     private String fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     private String move = "";
     private static final Log log = LogFactory.getLog(Controller .class);
-    private Map<String, Square> map = new HashMap<>(64);
     private boolean isWhite; // True if player plays White
     public static StockfishClient client = null;
 
@@ -81,7 +76,7 @@ public class Controller extends Control {
         if (isFirstClick) {
             log.info(event.getX()+" "+event.getY());
             chessBoard.selectPiece(event.getX(), event.getY());;
-            move += map.get(colIndex + "" + rowIndex).getCoord();
+
             isFirstClick = false;
             CompletableFuture<String> resultFuture = new CompletableFuture<>();
             log.info(move);

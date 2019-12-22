@@ -1,7 +1,8 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.template.board;
 
 import java.util.concurrent.TimeUnit;
 
+import com.github.danildorogoy.template.board.ChessBoard;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;

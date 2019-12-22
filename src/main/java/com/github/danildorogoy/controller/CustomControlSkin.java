@@ -1,4 +1,4 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.controller;
 
 
 //basic implementation of a Skin

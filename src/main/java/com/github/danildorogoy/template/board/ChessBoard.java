@@ -1,4 +1,4 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.template.board;
 
 
 import java.util.ArrayList;
@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import com.github.danildorogoy.template.GameLogic;
+import com.github.danildorogoy.template.piece.*;
 import javafx.animation.Timeline;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -356,14 +358,14 @@ public class ChessBoard extends Pane {
             checkState = false;
             for (Iterator<Piece> piece = saviorPieces.iterator(); piece.hasNext(); ) {
                 Piece item = piece.next();
-                item.isASavior = false;
+                item.setASavior(false) ;
             }
-            if (gameLogic.isCheck(this, king_2.xPos, king_2.yPos, current_player, true)) {
+            if (gameLogic.isCheck(this, king_2.getX(), king_2.getY(), current_player, true)) {
                 checkPieces.clear();
                 saviorPieces.clear();
                 checkState = true;
-                gameLogic.findAllCheckPieces(this, king_2.xPos, king_2.yPos, current_player);
-                if (gameLogic.isCheckmate(this, king_2.xPos, king_2.yPos, current_player)) {
+                gameLogic.findAllCheckPieces(this, king_2.getX(), king_2.getY(), current_player);
+                if (gameLogic.isCheckmate(this, king_2.getX(), king_2.getY(), current_player)) {
                     checkmate = true;
                     statusBar.blackPlayerAlert.setText("Black player is in checkmate");
                     statusBar.winner.setText("White player won !");
@@ -379,14 +381,14 @@ public class ChessBoard extends Pane {
             checkState = false;
             for (Iterator<Piece> piece = saviorPieces.iterator(); piece.hasNext(); ) {
                 Piece item = piece.next();
-                item.isASavior = false;
+                item.setASavior(false);
             }
-            if (gameLogic.isCheck(this, king_1.xPos, king_1.yPos, current_player, true)) {
+            if (gameLogic.isCheck(this, king_1.getX(), king_1.getY(), current_player, true)) {
                 checkPieces.clear();
                 saviorPieces.clear();
                 checkState = true;
-                gameLogic.findAllCheckPieces(this, king_1.xPos, king_1.yPos, current_player);
-                if (gameLogic.isCheckmate(this, king_1.xPos, king_1.yPos, current_player)) {
+                gameLogic.findAllCheckPieces(this, king_1.getX(), king_1.getY(), current_player);
+                if (gameLogic.isCheckmate(this, king_1.getX(), king_1.getY(), current_player)) {
                     checkmate = true;
                     statusBar.whitePlayerAlert.setText("White player is in checkmate");
                     statusBar.winner.setText("Black player won !");
@@ -417,45 +419,45 @@ public class ChessBoard extends Pane {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonRook) {
-            promotedPiece = new PieceRook(piece.type, piece.xPos, piece.yPos);
+            promotedPiece = new PieceRook(piece.getType(), piece.getX(), piece.getY());
             getChildren().remove(piece.getImage());
             getChildren().add(promotedPiece.getImage());
-            pieces[piece.xPos][piece.yPos] = promotedPiece;
-            if (piece.type == 1)
+            pieces[piece.getX()][piece.getY()] = promotedPiece;
+            if (piece.getType() == 1)
                 playerOneRook++;
             else
                 playerTwoRook++;
         } else if (result.get() == buttonKnight) {
-            promotedPiece = new PieceKnight(piece.type, piece.xPos, piece.yPos);
+            promotedPiece = new PieceKnight(piece.getType(), piece.getX(), piece.getY());
             getChildren().remove(piece.getImage());
             getChildren().add(promotedPiece.getImage());
-            pieces[piece.xPos][piece.yPos] = promotedPiece;
-            if (piece.type == 1)
+            pieces[piece.getX()][piece.getY()] = promotedPiece;
+            if (piece.getType() == 1)
                 playerOneKnight++;
             else
                 playerTwoKnight++;
         } else if (result.get() == buttonBishop) {
-            promotedPiece = new PieceBishop(piece.type, piece.xPos, piece.yPos);
+            promotedPiece = new PieceBishop(piece.getType(), piece.getX(), piece.getY());
             getChildren().remove(piece.getImage());
             getChildren().add(promotedPiece.getImage());
-            pieces[piece.xPos][piece.yPos] = promotedPiece;
-            if (piece.type == 1) {
-                if ((piece.xPos + piece.yPos) % 2 != 0)
+            pieces[piece.getX()][piece.getY()] = promotedPiece;
+            if (piece.getType() == 1) {
+                if ((piece.getX() + piece.getY()) % 2 != 0)
                     playerOneBishopDarkSquare++;
                 else
                     playerOneBishopLightSquare++;
             } else {
-                if ((piece.xPos + piece.yPos) % 2 == 0)
+                if ((piece.getX() + piece.getY()) % 2 == 0)
                     playerTwoBishopLightSquare++;
                 else
                     playerTwoBishopDarkSquare++;
             }
         } else if (result.get() == buttonQueen) {
-            promotedPiece = new PieceQueen(piece.type, piece.xPos, piece.yPos);
+            promotedPiece = new PieceQueen(piece.getType(), piece.getX(), piece.getY());
             getChildren().remove(piece.getImage());
             getChildren().add(promotedPiece.getImage());
-            pieces[piece.xPos][piece.yPos] = promotedPiece;
-            if (piece.type == 1)
+            pieces[piece.getX()][piece.getY()] = promotedPiece;
+            if (piece.getType() == 1)
                 playerOneQueen++;
             else
                 playerTwoQueen++;

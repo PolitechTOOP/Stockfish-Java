@@ -1,5 +1,8 @@
 package com.github.danildorogoy.template;
 
+import com.github.danildorogoy.template.board.ChessBoard;
+import com.github.danildorogoy.template.piece.Piece;
+
 import java.util.Iterator;
 
 public class GameLogic {
@@ -17,8 +20,8 @@ public class GameLogic {
             }
         }
         if (nbPiece == 1) {
-            for (int y = king.yPos - 1; y <= king.yPos + 1; y++) {
-                for (int x = king.xPos - 1; x <= king.xPos + 1; x++) {
+            for (int y = king.getY() - 1; y <= king.getY() + 1; y++) {
+                for (int x = king.getX() - 1; x <= king.getX() + 1; x++) {
                     if (y >= 0 && y < chessBoard.getBoardHeight() && x >= 0 && x < chessBoard.getBoardWidth() && chessBoard.getBoardPosition(x, y) != type) {
                         if (!isCheck(chessBoard, x, y, type, true)) {
                             stalemate = false;
@@ -77,12 +80,12 @@ public class GameLogic {
 
         // King on the Vertical Up
         for (y = yPos - 1; y >= 0; y--) {
-            if (chessBoard.getBoardPosition(xPos, y) == type && chessBoard.getPiece(xPos, y).name == "King") {
+            if (chessBoard.getBoardPosition(xPos, y) == type && chessBoard.getPiece(xPos, y).getName() == "King") {
                 for (y = yPos + 1; y < chessBoard.getBoardHeight(); y++) {
                     if (chessBoard.getBoardPosition(xPos, y) == type)
                         break;
                     else if (chessBoard.getBoardPosition(xPos, y) == enemyType) {
-                        if (chessBoard.getPiece(xPos, y).name == "Queen" || chessBoard.getPiece(xPos, y).name == "Rook")
+                        if (chessBoard.getPiece(xPos, y).getName() == "Queen" || chessBoard.getPiece(xPos, y).getName() == "Rook")
                             return true;
                         else
                             break;
@@ -94,12 +97,12 @@ public class GameLogic {
         }
         // King on the Vertical Down
         for (y = yPos + 1; y < chessBoard.getBoardHeight(); y++) {
-            if (chessBoard.getBoardPosition(xPos, y) == type && chessBoard.getPiece(xPos, y).name == "King") {
+            if (chessBoard.getBoardPosition(xPos, y) == type && chessBoard.getPiece(xPos, y).getName() == "King") {
                 for (y = yPos - 1; y >= 0; y--) {
                     if (chessBoard.getBoardPosition(xPos, y) == type)
                         break;
                     else if (chessBoard.getBoardPosition(xPos, y) == enemyType) {
-                        if (chessBoard.getPiece(xPos, y).name == "Queen" || chessBoard.getPiece(xPos, y).name == "Rook")
+                        if (chessBoard.getPiece(xPos, y).getName() == "Queen" || chessBoard.getPiece(xPos, y).getName() == "Rook")
                             return true;
                         else
                             break;
@@ -122,12 +125,12 @@ public class GameLogic {
 
         // King on the Horizontal Left
         for (x = xPos - 1; x >= 0; x--) {
-            if (chessBoard.getBoardPosition(x, yPos) == type && chessBoard.getPiece(x, yPos).name == "King") {
+            if (chessBoard.getBoardPosition(x, yPos) == type && chessBoard.getPiece(x, yPos).getName() == "King") {
                 for (x = xPos + 1; x < chessBoard.getBoardWidth(); x++) {
                     if (chessBoard.getBoardPosition(x, yPos) == type)
                         break;
                     else if (chessBoard.getBoardPosition(x, yPos) == enemyType) {
-                        if (chessBoard.getPiece(x, yPos).name == "Queen" || chessBoard.getPiece(x, yPos).name == "Rook")
+                        if (chessBoard.getPiece(x, yPos).getName() == "Queen" || chessBoard.getPiece(x, yPos).getName() == "Rook")
                             return true;
                         else
                             break;
@@ -139,12 +142,12 @@ public class GameLogic {
         }
         // King on the Horizontal Right
         for (x = xPos + 1; x < chessBoard.getBoardWidth(); x++) {
-            if (chessBoard.getBoardPosition(x, yPos) == type && chessBoard.getPiece(x, yPos).name == "King") {
+            if (chessBoard.getBoardPosition(x, yPos) == type && chessBoard.getPiece(x, yPos).getName() == "King") {
                 for (x = xPos - 1; x >= 0; x--) {
                     if (chessBoard.getBoardPosition(x, yPos) == type)
                         break;
                     else if (chessBoard.getBoardPosition(x, yPos) == enemyType) {
-                        if (chessBoard.getPiece(x, yPos).name == "Queen" || chessBoard.getPiece(x, yPos).name == "Rook")
+                        if (chessBoard.getPiece(x, yPos).getName() == "Queen" || chessBoard.getPiece(x, yPos).getName() == "Rook")
                             return true;
                         else
                             break;
@@ -167,13 +170,13 @@ public class GameLogic {
         // King on the Diagonal / Up
         int y = yPos - 1;
         for (int x = xPos + 1; x < chessBoard.getBoardWidth() && y >= 0; x++, y--) {
-            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).name == "King") {
+            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).getName() == "King") {
                 y = yPos + 1;
                 for (x = xPos - 1; x >= 0 && y < chessBoard.getBoardHeight(); x--, y++) {
                     if (chessBoard.getBoardPosition(x, y) == type)
                         break;
                     else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                        if (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop")
+                        if (chessBoard.getPiece(x, y).getName() == "Queen" || chessBoard.getPiece(x, y).getName() == "Bishop")
                             return true;
                         else
                             break;
@@ -186,13 +189,13 @@ public class GameLogic {
         // King on the Diagonal / Down
         y = yPos + 1;
         for (int x = xPos - 1; x >= 0 && y < chessBoard.getBoardHeight(); x--, y++) {
-            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).name == "King") {
+            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).getName() == "King") {
                 y = yPos - 1;
                 for (x = xPos + 1; x < chessBoard.getBoardWidth() && y >= 0; x++, y--) {
                     if (chessBoard.getBoardPosition(x, y) == type)
                         break;
                     else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                        if (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop")
+                        if (chessBoard.getPiece(x, y).getName() == "Queen" || chessBoard.getPiece(x, y).getName() == "Bishop")
                             return true;
                         else
                             break;
@@ -215,13 +218,13 @@ public class GameLogic {
         // King on the Diagonal \ Up
         int y = yPos - 1;
         for (int x = xPos - 1; x >= 0 && y >= 0; x--, y--) {
-            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).name == "King") {
+            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).getName() == "King") {
                 y = yPos + 1;
                 for (x = xPos + 1; x < chessBoard.getBoardWidth() && y < chessBoard.getBoardHeight(); x++, y++) {
                     if (chessBoard.getBoardPosition(x, y) == type)
                         break;
                     else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                        if (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop")
+                        if (chessBoard.getPiece(x, y).getName() == "Queen" || chessBoard.getPiece(x, y).getName() == "Bishop")
                             return true;
                         else
                             break;
@@ -234,13 +237,13 @@ public class GameLogic {
         // King on the Diagonal \ Down
         y = yPos + 1;
         for (int x = xPos + 1; x < chessBoard.getBoardWidth() && y < chessBoard.getBoardHeight(); x++, y++) {
-            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).name == "King") {
+            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).getName() == "King") {
                 y = yPos - 1;
                 for (x = xPos - 1; x >= 0 && y >= 0; x--, y--) {
                     if (chessBoard.getBoardPosition(x, y) == type)
                         break;
                     else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                        if (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop")
+                        if (chessBoard.getPiece(x, y).getName() == "Queen" || chessBoard.getPiece(x, y).getName() == "Bishop")
                             return true;
                         else
                             break;
@@ -265,12 +268,12 @@ public class GameLogic {
 
         // Horizontal Left
         for (x = xPos - 1; x >= 0; x--) {
-            if (chessBoard.getBoardPosition(x, yPos) == type && chessBoard.getPiece(x, yPos).name != "King")
+            if (chessBoard.getBoardPosition(x, yPos) == type && chessBoard.getPiece(x, yPos).getName() != "King")
                 break;
             else if (chessBoard.getBoardPosition(x, yPos) == enemyType) {
-                if (x == xPos - 1 && chessBoard.getPiece(x, yPos) != null && kingCanCapture && chessBoard.getPiece(x, yPos).name == "King")
+                if (x == xPos - 1 && chessBoard.getPiece(x, yPos) != null && kingCanCapture && chessBoard.getPiece(x, yPos).getName() == "King")
                     return true;
-                else if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).name == "Queen" || chessBoard.getPiece(x, yPos).name == "Rook"))
+                else if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).getName() == "Queen" || chessBoard.getPiece(x, yPos).getName() == "Rook"))
                     return true;
                 else
                     break;
@@ -278,12 +281,12 @@ public class GameLogic {
         }
         // Horizontal Right
         for (x = xPos + 1; x < chessBoard.getBoardWidth(); x++) {
-            if (chessBoard.getBoardPosition(x, yPos) == type && chessBoard.getPiece(x, yPos).name != "King")
+            if (chessBoard.getBoardPosition(x, yPos) == type && chessBoard.getPiece(x, yPos).getName() != "King")
                 break;
             else if (chessBoard.getBoardPosition(x, yPos) == enemyType) {
-                if (x == xPos + 1 && chessBoard.getPiece(x, yPos) != null && kingCanCapture && chessBoard.getPiece(x, yPos).name == "King")
+                if (x == xPos + 1 && chessBoard.getPiece(x, yPos) != null && kingCanCapture && chessBoard.getPiece(x, yPos).getName() == "King")
                     return true;
-                else if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).name == "Queen" || chessBoard.getPiece(x, yPos).name == "Rook"))
+                else if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).getName() == "Queen" || chessBoard.getPiece(x, yPos).getName() == "Rook"))
                     return true;
                 else
                     break;
@@ -291,12 +294,12 @@ public class GameLogic {
         }
         // Vertical Up
         for (y = yPos - 1; y >= 0; y--) {
-            if (chessBoard.getBoardPosition(xPos, y) == type && chessBoard.getPiece(xPos, y).name != "King")
+            if (chessBoard.getBoardPosition(xPos, y) == type && chessBoard.getPiece(xPos, y).getName() != "King")
                 break;
             else if (chessBoard.getBoardPosition(xPos, y) == enemyType) {
-                if (y == yPos - 1 && chessBoard.getPiece(xPos, y) != null && kingCanCapture && chessBoard.getPiece(xPos, y).name == "King")
+                if (y == yPos - 1 && chessBoard.getPiece(xPos, y) != null && kingCanCapture && chessBoard.getPiece(xPos, y).getName() == "King")
                     return true;
-                else if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).name == "Queen" || chessBoard.getPiece(xPos, y).name == "Rook"))
+                else if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).getName().equals("Queen") || chessBoard.getPiece(xPos, y).getName() == "Rook"))
                     return true;
                 else
                     break;
@@ -304,12 +307,13 @@ public class GameLogic {
         }
         // Vertical Down
         for (y = yPos + 1; y < chessBoard.getBoardHeight(); y++) {
-            if (chessBoard.getBoardPosition(xPos, y) == type && chessBoard.getPiece(xPos, y).name != "King")
+            if (chessBoard.getBoardPosition(xPos, y) == type && !chessBoard.getPiece(xPos, y).getName().equals("King"))
                 break;
             else if (chessBoard.getBoardPosition(xPos, y) == enemyType) {
-                if (y == yPos + 1 && chessBoard.getPiece(xPos, y) != null && kingCanCapture && chessBoard.getPiece(xPos, y).name == "King")
+                if (y == yPos + 1 && chessBoard.getPiece(xPos, y) != null && kingCanCapture && chessBoard.getPiece(xPos, y).getName() == "King")
                     return true;
-                else if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).name == "Queen" || chessBoard.getPiece(xPos, y).name == "Rook"))
+                else if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).getName()
+                        .equals("Queen") || chessBoard.getPiece(xPos, y).getName().equals("Rook")))
                     return true;
                 else
                     break;
@@ -317,12 +321,16 @@ public class GameLogic {
         }
         // Diagonal 1 \ Up
         for (y = yPos - 1, x = xPos - 1; y >= 0 && x >= 0; y--, x--) {
-            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).name != "King")
+            if (chessBoard.getBoardPosition(x, y) == type && !chessBoard.getPiece(x, y).getName().equals("King"))
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && ((kingCanCapture && chessBoard.getPiece(x, y).name == "King") || (type == 1 && chessBoard.getPiece(x, y).name == "Pawn")))
+                if (y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        ((kingCanCapture && chessBoard.getPiece(x, y).getName().equals("King")) || (type == 1 &&
+                                chessBoard.getPiece(x, y).getName().equals("Pawn"))))
                     return true;
-                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (chessBoard.getPiece(x, y).getName().equals("Queen") ||
+                                chessBoard.getPiece(x, y).getName().equals("Bishop")))
                     return true;
                 else
                     break;
@@ -330,12 +338,16 @@ public class GameLogic {
         }
         // Diagonal 1 \ Down
         for (y = yPos + 1, x = xPos + 1; y < chessBoard.getBoardHeight() && x < chessBoard.getBoardWidth(); y++, x++) {
-            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).name != "King")
+            if (chessBoard.getBoardPosition(x, y) == type && !chessBoard.getPiece(x, y).getName().equals("King"))
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && ((kingCanCapture && chessBoard.getPiece(x, y).name == "King") || (type == 2 && chessBoard.getPiece(x, y).name == "Pawn")))
+                if (y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        ((kingCanCapture && chessBoard.getPiece(x, y).getName().equals("King")) ||
+                                (type == 2 && chessBoard.getPiece(x, y).getName().equals("Pawn"))))
                     return true;
-                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (chessBoard.getPiece(x, y).getName().equals("Queen") ||
+                                chessBoard.getPiece(x, y).getName().equals("Bishop")))
                     return true;
                 else
                     break;
@@ -343,12 +355,16 @@ public class GameLogic {
         }
         // Diagonal 2 / Up
         for (y = yPos - 1, x = xPos + 1; y >= 0 && x < chessBoard.getBoardWidth(); y--, x++) {
-            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).name != "King")
+            if (chessBoard.getBoardPosition(x, y) == type && !chessBoard.getPiece(x, y).getName().equals("King"))
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && ((kingCanCapture && chessBoard.getPiece(x, y).name == "King") || (type == 1 && chessBoard.getPiece(x, y).name == "Pawn")))
+                if (y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        ((kingCanCapture && chessBoard.getPiece(x, y).getName().equals("King")) ||
+                                (type == 1 && chessBoard.getPiece(x, y).getName().equals("Pawn"))))
                     return true;
-                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (chessBoard.getPiece(x, y).getName().equals("Queen") || chessBoard.getPiece(x, y).getName()
+                                .equals("Bishop")))
                     return true;
                 else
                     break;
@@ -356,12 +372,16 @@ public class GameLogic {
         }
         // Diagonal 2 / Down
         for (y = yPos + 1, x = xPos - 1; y < chessBoard.getBoardHeight() && x >= 0; y++, x--) {
-            if (chessBoard.getBoardPosition(x, y) == type && chessBoard.getPiece(x, y).name != "King")
+            if (chessBoard.getBoardPosition(x, y) == type && !chessBoard.getPiece(x, y).getName().equals("King"))
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && ((kingCanCapture && chessBoard.getPiece(x, y).name == "King") || (type == 2 && chessBoard.getPiece(x, y).name == "Pawn")))
+                if (y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        ((kingCanCapture && chessBoard.getPiece(x, y).getName().equals("King")) ||
+                                (type == 2 && chessBoard.getPiece(x, y).getName().equals("Pawn"))))
                     return true;
-                else if (chessBoard.getBoardPosition(x, y) != 0 && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                else if (chessBoard.getBoardPosition(x, y) != 0 &&
+                        (chessBoard.getPiece(x, y).getName().equals("Queen") ||
+                                chessBoard.getPiece(x, y).getName().equals("Bishop")))
                     return true;
                 else
                     break;
@@ -371,12 +391,18 @@ public class GameLogic {
         for (y = -2; y <= 2; y++) {
             if (y != 0) {
                 x = y % 2 == 0 ? 1 : 2;
-                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos - x >= 0 && xPos - x < chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos - x, yPos + y) != type && chessBoard.getBoardPosition(xPos - x, yPos + y) != 0) {
-                    if (chessBoard.getPiece(xPos - x, yPos + y) != null && chessBoard.getPiece(xPos - x, yPos + y).name == "Knight")
+                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos - x >= 0 && xPos - x <
+                        chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos - x, yPos + y) != type &&
+                        chessBoard.getBoardPosition(xPos - x, yPos + y) != 0) {
+                    if (chessBoard.getPiece(xPos - x, yPos + y) != null &&
+                            chessBoard.getPiece(xPos - x, yPos + y).getName().equals("Knight"))
                         return true;
                 }
-                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos + x >= 0 && xPos + x < chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos + x, yPos + y) != type && chessBoard.getBoardPosition(xPos + x, yPos + y) != 0) {
-                    if (chessBoard.getPiece(xPos + x, yPos + y) != null && chessBoard.getPiece(xPos + x, yPos + y).name == "Knight")
+                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos + x >= 0 && xPos + x <
+                        chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos + x, yPos + y) != type &&
+                        chessBoard.getBoardPosition(xPos + x, yPos + y) != 0) {
+                    if (chessBoard.getPiece(xPos + x, yPos + y) != null &&
+                            chessBoard.getPiece(xPos + x, yPos + y).getName().equals("Knight"))
                         return true;
                 }
             }
@@ -399,7 +425,8 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, yPos) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, yPos) == enemyType) {
-                if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).name == "Queen" || chessBoard.getPiece(x, yPos).name == "Rook"))
+                if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).getName().equals("Queen") ||
+                        chessBoard.getPiece(x, yPos).getName().equals("Rook")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(x, yPos));
                 else
                     break;
@@ -410,7 +437,8 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, yPos) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, yPos) == enemyType) {
-                if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).name == "Queen" || chessBoard.getPiece(x, yPos).name == "Rook"))
+                if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).getName().equals("Queen") ||
+                        chessBoard.getPiece(x, yPos).getName().equals("Rook")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(x, yPos));
                 else
                     break;
@@ -421,7 +449,8 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(xPos, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(xPos, y) == enemyType) {
-                if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).name == "Queen" || chessBoard.getPiece(xPos, y).name == "Rook"))
+                if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).getName().equals("Queen") ||
+                        chessBoard.getPiece(xPos, y).getName().equals("Rook")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(xPos, y));
                 else
                     break;
@@ -432,7 +461,8 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(xPos, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(xPos, y) == enemyType) {
-                if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).name == "Queen" || chessBoard.getPiece(xPos, y).name == "Rook"))
+                if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).getName().equals("Queen") ||
+                        chessBoard.getPiece(xPos, y).getName().equals("Rook")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(xPos, y));
                 else
                     break;
@@ -443,9 +473,12 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (type == 1 && chessBoard.getPiece(x, y).name == "Pawn"))
+                if (y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (type == 1 && chessBoard.getPiece(x, y).getName().equals("Pawn")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(x, y));
-                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (chessBoard.getPiece(x, y).getName().equals("Queen") ||
+                                chessBoard.getPiece(x, y).getName().equals("Bishop")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(x, y));
                 else
                     break;
@@ -456,9 +489,12 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (type == 2 && chessBoard.getPiece(x, y).name == "Pawn"))
+                if (y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (type == 2 && chessBoard.getPiece(x, y).getName().equals("Pawn")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(x, y));
-                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (chessBoard.getPiece(x, y).getName().equals("Queen") ||
+                                chessBoard.getPiece(x, y).getName().equals("Bishop")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(x, y));
                 else
                     break;
@@ -469,9 +505,12 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (type == 1 && chessBoard.getPiece(x, y).name == "Pawn"))
+                if (y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (type == 1 && chessBoard.getPiece(x, y).getName().equals("Pawn")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(x, y));
-                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                else if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (chessBoard.getPiece(x, y).getName().equals("Queen") || chessBoard.getPiece(x, y).getName()
+                                .equals("Bishop")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(x, y));
                 else
                     break;
@@ -482,9 +521,11 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (type == 2 && chessBoard.getPiece(x, y).name == "Pawn"))
+                if (y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (type == 2 && chessBoard.getPiece(x, y).getName().equals("Pawn")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(x, y));
-                if (chessBoard.getBoardPosition(x, y) != 0 && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                if (chessBoard.getBoardPosition(x, y) != 0 && (chessBoard.getPiece(x, y).getName().equals("Queen") ||
+                        chessBoard.getPiece(x, y).getName().equals("Bishop")))
                     chessBoard.checkPieces.add(chessBoard.getPiece(x, y));
                 else
                     break;
@@ -494,12 +535,18 @@ public class GameLogic {
         for (y = -2; y <= 2; y++) {
             if (y != 0) {
                 x = y % 2 == 0 ? 1 : 2;
-                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos - x >= 0 && xPos - x < chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos - x, yPos + y) != type && chessBoard.getBoardPosition(xPos - x, yPos + y) != 0) {
-                    if (chessBoard.getPiece(xPos - x, yPos + y) != null && chessBoard.getPiece(xPos - x, yPos + y).name == "Knight")
+                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos - x >= 0 && xPos - x <
+                        chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos - x, yPos + y) != type &&
+                        chessBoard.getBoardPosition(xPos - x, yPos + y) != 0) {
+                    if (chessBoard.getPiece(xPos - x, yPos + y) != null &&
+                            chessBoard.getPiece(xPos - x, yPos + y).getName().equals("Knight"))
                         chessBoard.checkPieces.add(chessBoard.getPiece(xPos - x, yPos + y));
                 }
-                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos + x >= 0 && xPos + x < chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos + x, yPos + y) != type && chessBoard.getBoardPosition(xPos + x, yPos + y) != 0) {
-                    if (chessBoard.getPiece(xPos + x, yPos + y) != null && chessBoard.getPiece(xPos + x, yPos + y).name == "Knight")
+                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos + x >= 0 && xPos + x <
+                        chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos + x, yPos + y) != type &&
+                        chessBoard.getBoardPosition(xPos + x, yPos + y) != 0) {
+                    if (chessBoard.getPiece(xPos + x, yPos + y) != null &&
+                            chessBoard.getPiece(xPos + x, yPos + y).getName().equals("Knight"))
                         chessBoard.checkPieces.add(chessBoard.getPiece(xPos + x, yPos + y));
                 }
             }
@@ -521,7 +568,8 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, yPos) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, yPos) == enemyType) {
-                if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).name == "Queen" || chessBoard.getPiece(x, yPos).name == "Rook"))
+                if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).getName().equals("Queen") ||
+                        chessBoard.getPiece(x, yPos).getName().equals("Rook")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(x, yPos));
                 else
                     break;
@@ -532,7 +580,8 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, yPos) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, yPos) == enemyType) {
-                if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).name == "Queen" || chessBoard.getPiece(x, yPos).name == "Rook"))
+                if (chessBoard.getPiece(x, yPos) != null && (chessBoard.getPiece(x, yPos).getName().equals("Queen") ||
+                        chessBoard.getPiece(x, yPos).getName().equals("Rook")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(x, yPos));
                 else
                     break;
@@ -543,11 +592,14 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(xPos, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(xPos, y) == enemyType) {
-                if (enemyType == 2 && protect == true && y == yPos - 1 && chessBoard.getPiece(xPos, y) != null && chessBoard.getPiece(xPos, y).name == "Pawn")
+                if (enemyType == 2 && protect && y == yPos - 1 && chessBoard.getPiece(xPos, y) != null &&
+                        chessBoard.getPiece(xPos, y).getName().equals("Pawn"))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(xPos, y));
-                if (enemyType == 2 && protect == true && y == yPos - 2 && chessBoard.getPiece(xPos, y) != null && chessBoard.getPiece(xPos, y).name == "Pawn" && chessBoard.getPiece(xPos, y).isFirstTime())
+                if (enemyType == 2 && protect && y == yPos - 2 && chessBoard.getPiece(xPos, y) != null &&
+                        chessBoard.getPiece(xPos, y).getName().equals("Pawn") && chessBoard.getPiece(xPos, y).isFirstTime())
                     chessBoard.saviorPieces.add(chessBoard.getPiece(xPos, y));
-                if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).name == "Queen" || chessBoard.getPiece(xPos, y).name == "Rook"))
+                if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).getName().equals("Queen") ||
+                        chessBoard.getPiece(xPos, y).getName().equals("Rook")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(xPos, y));
                 else
                     break;
@@ -558,11 +610,15 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(xPos, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(xPos, y) == enemyType) {
-                if (enemyType == 1 && protect == true && y == yPos + 1 && chessBoard.getPiece(xPos, y) != null && chessBoard.getPiece(xPos, y).name == "Pawn")
+                if (enemyType == 1 && protect && y == yPos + 1 && chessBoard.getPiece(xPos, y) != null &&
+                        chessBoard.getPiece(xPos, y).getName().equals("Pawn"))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(xPos, y));
-                if (enemyType == 1 && protect == true && y == yPos + 2 && chessBoard.getPiece(xPos, y) != null && chessBoard.getPiece(xPos, y).name == "Pawn" && chessBoard.getPiece(xPos, y).isFirstTime())
+                if (enemyType == 1 && protect && y == yPos + 2 && chessBoard.getPiece(xPos, y) != null &&
+                        chessBoard.getPiece(xPos, y).getName()
+                                .equals("Pawn") && chessBoard.getPiece(xPos, y).isFirstTime())
                     chessBoard.saviorPieces.add(chessBoard.getPiece(xPos, y));
-                if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).name == "Queen" || chessBoard.getPiece(xPos, y).name == "Rook"))
+                if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).getName().equals("Queen") ||
+                        chessBoard.getPiece(xPos, y).getName().equals("Rook")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(xPos, y));
                 else
                     break;
@@ -573,9 +629,13 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (protect == false && y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (type == 1 && chessBoard.getPiece(x, y).name == "Pawn"))
+                if (!protect && y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 &&
+                        chessBoard.getPiece(x, y) != null && (type == 1 && chessBoard.getPiece(x, y).getName()
+                        .equals("Pawn")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(x, y));
-                if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (chessBoard.getPiece(x, y).getName().equals("Queen") || chessBoard.getPiece(x, y).getName()
+                                .equals("Bishop")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(x, y));
                 else
                     break;
@@ -586,9 +646,13 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (protect == false && y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (type == 2 && chessBoard.getPiece(x, y).name == "Pawn"))
+                if (!protect && y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 &&
+                        chessBoard.getPiece(x, y) != null && (type == 2 && chessBoard.getPiece(x, y).getName()
+                        .equals("Pawn")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(x, y));
-                if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (chessBoard.getPiece(x, y).getName().equals("Queen") || chessBoard.getPiece(x, y).getName()
+                                .equals("Bishop")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(x, y));
                 else
                     break;
@@ -599,9 +663,13 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (protect == false && y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (type == 1 && chessBoard.getPiece(x, y).name == "Pawn"))
+                if (!protect && y == yPos - 1 && chessBoard.getBoardPosition(x, y) != 0 &&
+                        chessBoard.getPiece(x, y) != null && (type == 1 && chessBoard.getPiece(x, y).getName()
+                        .equals("Pawn")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(x, y));
-                if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                if (chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null &&
+                        (chessBoard.getPiece(x, y).getName().equals("Queen") || chessBoard.getPiece(x, y).getName()
+                                .equals("Bishop")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(x, y));
                 else
                     break;
@@ -612,9 +680,12 @@ public class GameLogic {
             if (chessBoard.getBoardPosition(x, y) == type)
                 break;
             else if (chessBoard.getBoardPosition(x, y) == enemyType) {
-                if (protect == false && y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 && chessBoard.getPiece(x, y) != null && (type == 2 && chessBoard.getPiece(x, y).name == "Pawn"))
+                if (!protect && y == yPos + 1 && chessBoard.getBoardPosition(x, y) != 0 &&
+                        chessBoard.getPiece(x, y) != null && (type == 2 && chessBoard.getPiece(x, y).getName()
+                        .equals("Pawn")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(x, y));
-                if (chessBoard.getBoardPosition(x, y) != 0 && (chessBoard.getPiece(x, y).name == "Queen" || chessBoard.getPiece(x, y).name == "Bishop"))
+                if (chessBoard.getBoardPosition(x, y) != 0 && (chessBoard.getPiece(x, y).getName().equals("Queen") ||
+                        chessBoard.getPiece(x, y).getName().equals("Bishop")))
                     chessBoard.saviorPieces.add(chessBoard.getPiece(x, y));
                 else
                     break;
@@ -624,12 +695,18 @@ public class GameLogic {
         for (y = -2; y <= 2; y++) {
             if (y != 0) {
                 x = y % 2 == 0 ? 1 : 2;
-                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos - x >= 0 && xPos - x < chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos - x, yPos + y) != type && chessBoard.getBoardPosition(xPos - x, yPos + y) != 0) {
-                    if (chessBoard.getPiece(xPos - x, yPos + y) != null && chessBoard.getPiece(xPos - x, yPos + y).name == "Knight")
+                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos - x >= 0 && xPos - x <
+                        chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos - x, yPos + y) != type &&
+                        chessBoard.getBoardPosition(xPos - x, yPos + y) != 0) {
+                    if (chessBoard.getPiece(xPos - x, yPos + y) != null &&
+                            chessBoard.getPiece(xPos - x, yPos + y).getName().equals("Knight"))
                         chessBoard.saviorPieces.add(chessBoard.getPiece(xPos - x, yPos + y));
                 }
-                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos + x >= 0 && xPos + x < chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos + x, yPos + y) != type && chessBoard.getBoardPosition(xPos + x, yPos + y) != 0) {
-                    if (chessBoard.getPiece(xPos + x, yPos + y) != null && chessBoard.getPiece(xPos + x, yPos + y).name == "Knight")
+                if (yPos + y >= 0 && yPos + y < chessBoard.getBoardHeight() && xPos + x >= 0 && xPos + x <
+                        chessBoard.getBoardWidth() && chessBoard.getBoardPosition(xPos + x, yPos + y) != type &&
+                        chessBoard.getBoardPosition(xPos + x, yPos + y) != 0) {
+                    if (chessBoard.getPiece(xPos + x, yPos + y) != null &&
+                            chessBoard.getPiece(xPos + x, yPos + y).getName().equals("Knight"))
                         chessBoard.saviorPieces.add(chessBoard.getPiece(xPos + x, yPos + y));
                 }
             }
@@ -644,7 +721,8 @@ public class GameLogic {
         int y = yPos;
         for (y = yPos - 1; y <= yPos + 1; y++) {
             for (x = xPos - 1; x <= xPos + 1; x++) {
-                if (y >= 0 && y < chessboard.getBoardHeight() && x >= 0 && x < chessboard.getBoardWidth() && chessboard.getBoardPosition(x, y) != type) {
+                if (y >= 0 && y < chessboard.getBoardHeight() && x >= 0 && x < chessboard.getBoardWidth() &&
+                        chessboard.getBoardPosition(x, y) != type) {
                     if (!isCheck(chessboard, x, y, type, true)) {
                         checkmate = false;
                         break;
@@ -672,10 +750,12 @@ public class GameLogic {
             if (!chessboard.saviorPieces.isEmpty()) {
                 for (Iterator<Piece> piece = chessboard.saviorPieces.iterator(); piece.hasNext(); ) {
                     Piece item = piece.next();
-                    item.isASavior = true;
-                    if (verticalProtection(chessboard, item.xPos, item.yPos, item.type) || horizontalProtection(chessboard, item.xPos, item.yPos, item.type) ||
-                            slashDiagonalProtection(chessboard, item.xPos, item.yPos, item.type) || backslashDiagonalProtection(chessboard, item.xPos, item.yPos, item.type)) {
-                        item.isASavior = false;
+                    item.setASavior(true);
+                    if (verticalProtection(chessboard, item.getX(), item.getY(), item.getType()) ||
+                            horizontalProtection(chessboard, item.getX(), item.getY(), item.getType()) ||
+                            slashDiagonalProtection(chessboard, item.getX(), item.getY(), item.getType()) ||
+                            backslashDiagonalProtection(chessboard, item.getX(), item.getY(), item.getType())) {
+                        item.setASavior(false);
                         piece.remove();
                     }
                 }
@@ -688,91 +768,99 @@ public class GameLogic {
 
     // Method to check is someone can capture the piece that threat the king
     public void canCapture(ChessBoard chessboard, Piece checkPiece) {
-        findAllSaviorPieces(chessboard, checkPiece.xPos, checkPiece.yPos, checkPiece.type, false);
+        findAllSaviorPieces(chessboard, checkPiece.getX(), checkPiece.getY(), checkPiece.getType(), false);
     }
 
     // Method to check is someone can capture the threatening piece or protect the king from the piece that threat him
     public void canProtect(ChessBoard chessboard, int xPos, int yPos, int type, Piece checkPiece) {
-        if (checkPiece.name == "Knight" || checkPiece.name == "Pawn")
+        if (checkPiece.getName().equals("Knight") || checkPiece.getName().equals("Pawn"))
             return;
         // Vertical up threat
-        if (xPos == checkPiece.xPos && yPos > checkPiece.yPos)
-            for (int y = checkPiece.yPos + 1; y < yPos; y++)
-                findAllSaviorPieces(chessboard, checkPiece.xPos, y, checkPiece.type, true);
+        if (xPos == checkPiece.getX() && yPos > checkPiece.getY())
+            for (int y = checkPiece.getY() + 1; y < yPos; y++)
+                findAllSaviorPieces(chessboard, checkPiece.getX(), y, checkPiece.getType(), true);
         // Vertical down threat
-        if (xPos == checkPiece.xPos && yPos < checkPiece.yPos)
-            for (int y = checkPiece.yPos - 1; y > yPos; y--)
-                findAllSaviorPieces(chessboard, checkPiece.xPos, y, checkPiece.type, true);
+        if (xPos == checkPiece.getX() && yPos < checkPiece.getY())
+            for (int y = checkPiece.getY() - 1; y > yPos; y--)
+                findAllSaviorPieces(chessboard, checkPiece.getX(), y, checkPiece.getType(), true);
         // Horizontal left threat
-        if (xPos > checkPiece.xPos && yPos == checkPiece.yPos)
-            for (int x = checkPiece.xPos + 1; x < xPos; x++)
-                findAllSaviorPieces(chessboard, x, checkPiece.yPos, checkPiece.type, true);
+        if (xPos > checkPiece.getX() && yPos == checkPiece.getY())
+            for (int x = checkPiece.getX() + 1; x < xPos; x++)
+                findAllSaviorPieces(chessboard, x, checkPiece.getY(), checkPiece.getType(), true);
         // Horizontal right threat
-        if (xPos < checkPiece.xPos && yPos == checkPiece.yPos)
-            for (int x = checkPiece.xPos - 1; x > xPos; x--)
-                findAllSaviorPieces(chessboard, x, checkPiece.yPos, checkPiece.type, true);
+        if (xPos < checkPiece.getX() && yPos == checkPiece.getY())
+            for (int x = checkPiece.getX() - 1; x > xPos; x--)
+                findAllSaviorPieces(chessboard, x, checkPiece.getY(), checkPiece.getType(), true);
         // Diagonal 1 \ up threat
-        int y = checkPiece.yPos + 1;
-        if (xPos > checkPiece.xPos && yPos > checkPiece.yPos)
-            for (int x = checkPiece.xPos + 1; x < xPos && y < yPos; x++, y++)
-                findAllSaviorPieces(chessboard, x, y, checkPiece.type, true);
+        int y = checkPiece.getY() + 1;
+        if (xPos > checkPiece.getX() && yPos > checkPiece.getY())
+            for (int x = checkPiece.getX() + 1; x < xPos && y < yPos; x++, y++)
+                findAllSaviorPieces(chessboard, x, y, checkPiece.getType(), true);
         // Diagonal 1 \ down threat
-        y = checkPiece.yPos - 1;
-        if (xPos < checkPiece.xPos && yPos < checkPiece.yPos)
-            for (int x = checkPiece.xPos - 1; x > xPos && y > yPos; x--, y--)
-                findAllSaviorPieces(chessboard, x, y, checkPiece.type, true);
+        y = checkPiece.getY() - 1;
+        if (xPos < checkPiece.getX() && yPos < checkPiece.getY())
+            for (int x = checkPiece.getX() - 1; x > xPos && y > yPos; x--, y--)
+                findAllSaviorPieces(chessboard, x, y, checkPiece.getType(), true);
         // Diagonal 2 / up threat
-        y = checkPiece.yPos + 1;
-        if (xPos < checkPiece.xPos && yPos > checkPiece.yPos)
-            for (int x = checkPiece.xPos - 1; x > xPos && y < yPos; x--, y++)
-                findAllSaviorPieces(chessboard, x, y, checkPiece.type, true);
+        y = checkPiece.getY() + 1;
+        if (xPos < checkPiece.getX() && yPos > checkPiece.getY())
+            for (int x = checkPiece.getX() - 1; x > xPos && y < yPos; x--, y++)
+                findAllSaviorPieces(chessboard, x, y, checkPiece.getType(), true);
         // Diagonal 2 / down threat
-        y = checkPiece.yPos - 1;
-        if (xPos > checkPiece.xPos && yPos < checkPiece.yPos)
-            for (int x = checkPiece.xPos + 1; x < xPos && y > yPos; x++, y--)
-                findAllSaviorPieces(chessboard, x, y, checkPiece.type, true);
+        y = checkPiece.getY() - 1;
+        if (xPos > checkPiece.getX() && yPos < checkPiece.getY())
+            for (int x = checkPiece.getX() + 1; x < xPos && y > yPos; x++, y--)
+                findAllSaviorPieces(chessboard, x, y, checkPiece.getType(), true);
     }
 
     public boolean isThisProtecting(ChessBoard chessboard, int xPos, int yPos, int type) {
         Piece checkPiece = chessboard.checkPieces.get(0);
         // Vertical up threat
-        if (chessboard.getKing(type).xPos == checkPiece.xPos && chessboard.getKing(type).yPos > checkPiece.yPos)
-            if (xPos == chessboard.getKing(type).xPos && yPos < chessboard.getKing(type).yPos && yPos > checkPiece.yPos)
+        if (chessboard.getKing(type).getX() == checkPiece.getX() && chessboard.getKing(type).getY() > checkPiece.getY())
+            if (xPos == chessboard.getKing(type).getX() && yPos < chessboard.getKing(type).getY() &&
+                    yPos > checkPiece.getY())
                 return true;
         // Vertical down threat
-        if (chessboard.getKing(type).xPos == checkPiece.xPos && chessboard.getKing(type).yPos < checkPiece.yPos)
-            if (xPos == chessboard.getKing(type).xPos && yPos > chessboard.getKing(type).yPos && yPos < checkPiece.yPos)
+        if (chessboard.getKing(type).getX() == checkPiece.getX() && chessboard.getKing(type).getY() < checkPiece.getY())
+            if (xPos == chessboard.getKing(type).getX() && yPos > chessboard.getKing(type).getY() &&
+                    yPos < checkPiece.getY())
                 return true;
         // Horizontal left threat
-        if (chessboard.getKing(type).xPos > checkPiece.xPos && chessboard.getKing(type).yPos == checkPiece.yPos)
-            if (yPos == chessboard.getKing(type).yPos && xPos < chessboard.getKing(type).xPos && xPos > checkPiece.xPos)
+        if (chessboard.getKing(type).getX() > checkPiece.getX() && chessboard.getKing(type).getY() == checkPiece.getY())
+            if (yPos == chessboard.getKing(type).getY() && xPos < chessboard.getKing(type).getX() &&
+                    xPos > checkPiece.getX())
                 return true;
         // Horizontal right threat
-        if (chessboard.getKing(type).xPos < checkPiece.xPos && chessboard.getKing(type).yPos == checkPiece.yPos)
-            if (yPos == chessboard.getKing(type).yPos && xPos > chessboard.getKing(type).xPos && xPos < checkPiece.xPos)
+        if (chessboard.getKing(type).getX() < checkPiece.getX() && chessboard.getKing(type).getY() == checkPiece.getY())
+            if (yPos == chessboard.getKing(type).getY() && xPos > chessboard.getKing(type).getX() &&
+                    xPos < checkPiece.getX())
                 return true;
         // Diagonal 1 \ up threat
-        int y = checkPiece.yPos;
-        if (chessboard.getKing(type).xPos > checkPiece.xPos && chessboard.getKing(type).yPos > checkPiece.yPos)
-            for (int x = checkPiece.xPos; x < chessboard.getKing(type).xPos && y < chessboard.getKing(type).yPos; x++, y++)
+        int y = checkPiece.getY();
+        if (chessboard.getKing(type).getX() > checkPiece.getX() && chessboard.getKing(type).getY() > checkPiece.getY())
+            for (int x = checkPiece.getX(); x < chessboard.getKing(type).getX() && y < chessboard.getKing(type).getY();
+                 x++, y++)
                 if (xPos == x && yPos == y)
                     return true;
         // Diagonal 1 \ down threat
-        y = checkPiece.yPos;
-        if (chessboard.getKing(type).xPos < checkPiece.xPos && chessboard.getKing(type).yPos < checkPiece.yPos)
-            for (int x = checkPiece.xPos; x > chessboard.getKing(type).xPos && y > chessboard.getKing(type).yPos; x--, y--)
+        y = checkPiece.getY();
+        if (chessboard.getKing(type).getX() < checkPiece.getX() && chessboard.getKing(type).getY() < checkPiece.getY())
+            for (int x = checkPiece.getX(); x > chessboard.getKing(type).getX() && y > chessboard.getKing(type).getY();
+                 x--, y--)
                 if (xPos == x && yPos == y)
                     return true;
         // Diagonal 2 / up threat
-        y = checkPiece.yPos;
-        if (chessboard.getKing(type).xPos < checkPiece.xPos && chessboard.getKing(type).yPos > checkPiece.yPos)
-            for (int x = checkPiece.xPos; x > chessboard.getKing(type).xPos && y < chessboard.getKing(type).yPos; x--, y++)
+        y = checkPiece.getY();
+        if (chessboard.getKing(type).getX() < checkPiece.getX() && chessboard.getKing(type).getY() > checkPiece.getY())
+            for (int x = checkPiece.getX(); x > chessboard.getKing(type).getX() && y < chessboard.getKing(type).getY();
+                 x--, y++)
                 if (xPos == x && yPos == y)
                     return true;
         // Diagonal 2 / down threat
-        y = checkPiece.yPos;
-        if (chessboard.getKing(type).xPos > checkPiece.xPos && chessboard.getKing(type).yPos < checkPiece.yPos)
-            for (int x = checkPiece.xPos; x < chessboard.getKing(type).xPos && y > chessboard.getKing(type).yPos; x++, y--)
+        y = checkPiece.getY();
+        if (chessboard.getKing(type).getX() > checkPiece.getX() && chessboard.getKing(type).getY() < checkPiece.getY())
+            for (int x = checkPiece.getX(); x < chessboard.getKing(type).getX() && y > chessboard.getKing(type).getY();
+                 x++, y--)
                 if (xPos == x && yPos == y)
                     return true;
         return false;

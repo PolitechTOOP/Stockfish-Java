@@ -1,6 +1,5 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.template.board;
 
-import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

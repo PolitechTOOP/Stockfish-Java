@@ -1,8 +1,9 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy;
 
 //Chess  application
 
 //imports
+import com.github.danildorogoy.controller.CustomControl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

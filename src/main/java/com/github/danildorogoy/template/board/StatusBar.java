@@ -1,4 +1,4 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.template.board;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;

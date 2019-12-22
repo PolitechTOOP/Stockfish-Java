@@ -1,5 +1,6 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.template.piece;
 
+import com.github.danildorogoy.template.board.ChessBoard;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

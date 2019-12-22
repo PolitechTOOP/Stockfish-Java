@@ -1,15 +1,13 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.controller;
 
+import com.github.danildorogoy.controller.Controller;
+import com.github.danildorogoy.controller.CustomControl;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Control;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 

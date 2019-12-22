@@ -1,8 +1,9 @@
-package com.github.danildorogoy.template;
+package com.github.danildorogoy.controller;
 
+import com.github.danildorogoy.template.board.ChessBoard;
+import com.github.danildorogoy.template.board.StatusBar;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
