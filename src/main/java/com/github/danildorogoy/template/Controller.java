@@ -38,9 +38,11 @@ public class Controller extends Control implements Initializable{
     private static final Log log = LogFactory.getLog(ChessApplication.class);
     private Map<String, Square> map = new HashMap<>(64);
     private GridPane gridPane;
+    private boolean isWhite; // True if player plays White
 
 
-    public Controller(){
+    public Controller(boolean isWhite) {
+        this.isWhite = isWhite;
         setSkin(new ControllerSkin(this));
 
         statusBar = new StatusBar();

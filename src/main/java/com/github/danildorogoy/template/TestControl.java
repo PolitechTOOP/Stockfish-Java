@@ -50,7 +50,7 @@ public class TestControl implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 sp_mainlayout = new StackPane();
-                cc_control = new Controller();
+                cc_control = new Controller(true);
                 sp_mainlayout.getChildren().add(cc_control);
                 Stage primaryStage = new Stage();
                 primaryStage.setTitle("Chess game");
@@ -64,7 +64,7 @@ public class TestControl implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 sp_mainlayout = new StackPane();
-                cc_control = new Controller();
+                cc_control = new Controller(false);
                 sp_mainlayout.getChildren().add(cc_control);
                 Stage primaryStage = new Stage();
                 primaryStage.setTitle("Chess game");
