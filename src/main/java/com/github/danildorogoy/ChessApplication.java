@@ -1,8 +1,5 @@
 package com.github.danildorogoy;
 
-//Chess  application
-
-//imports
 import com.github.danildorogoy.controller.CustomControl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,8 +13,6 @@ import xyz.niflheim.stockfish.engine.StockfishClient;
 import xyz.niflheim.stockfish.exceptions.StockfishInitException;
 import java.io.IOException;
 
-
-//class definition
 public class ChessApplication extends Application {
 
 	private StackPane sp_mainlayout;
@@ -27,11 +22,10 @@ public class ChessApplication extends Application {
 
 	public static StockfishClient client = null;
 
-	// overridden init method
 	@Override
-	public void init() throws Exception{
-		// initialize the layout, create a CustomControl and it to the layout
-		sp_mainlayout = new StackPane(); 
+	public void init() throws Exception {
+
+		sp_mainlayout = new StackPane();
 		cc_custom = new CustomControl();
 		sp_mainlayout.getChildren().add(cc_custom);
 		super.init();
@@ -42,12 +36,9 @@ public class ChessApplication extends Application {
 			if (client != null) {
 				client.close();
 			}
-			clone();
-
 		}
 	}
-	
-	// overridden start method
+
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 
@@ -61,12 +52,10 @@ public class ChessApplication extends Application {
 		primaryStage.show();
 	}
 
-	// overridden stop method
 	@Override
 	public void stop() {
 		log.info("Close");
 	}
-	
-	// entry point into our program to launch our JavaFX application
+
 	public static void main(String[] args) { launch(args); }
 }
