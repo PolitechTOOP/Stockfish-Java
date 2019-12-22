@@ -122,24 +122,15 @@ public class ChessBoard extends Pane {
 		// for loop to populate all arrays to default values and add the windows
 		// to the board
 		for (int i = 0; i < 8; i++) {
-			if(i%2 == 0 || i ==0){
-				isBlack =false;
-			}
-			else
-				isBlack = true;
 			for (int j = 0; j < 8; j++) {
 				board[i][j] = EMPTY;
-				String coord = Character.toString((char)('a'+j))+(8-i);
-				if(isBlack){
-					windows[i][j] = new Window(true,coord); //Black
-					isBlack=false;
-				}else{
-					windows[i][j] = new Window(false,coord); //White
-					isBlack = true;
-				}
+				String coord = Character.toString((char)('a'+i))+(8-j);
+				windows[i][j] = new Window(isBlack,coord);
+                isBlack=!isBlack;
 				getChildren().add(windows[i][j]);
 				pieces[i][j] = null;
 			}
+			isBlack=!isBlack;
 		}
 
         // set the current player to white
