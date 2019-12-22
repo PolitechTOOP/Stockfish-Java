@@ -3,9 +3,14 @@ package com.github.danildorogoy.template;
 import com.github.danildorogoy.models.ChessPiece;
 import com.github.danildorogoy.models.Square;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Control;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.apache.commons.logging.Log;
@@ -22,7 +27,11 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 
-public class Controller implements Initializable {
+public class Controller extends Control implements Initializable{
+
+    private ChessBoard chessBoard;
+    private StatusBar statusBar;
+    private int statusBarSize = 100;
     private boolean isFirstClick = false;
     private String fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     private String move = "";
@@ -30,6 +39,42 @@ public class Controller implements Initializable {
     private Map<String, Square> map = new HashMap<>(64);
     private GridPane gridPane;
 
+
+    public Controller(){
+        setSkin(new ControllerSkin(this));
+
+        statusBar = new StatusBar();
+        chessBoard = new ChessBoard(statusBar);
+        getChildren().addAll(statusBar, chessBoard);
+
+        setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                // TODO Auto-generated method stub
+                chessBoard.selectPiece(event.getX(), event.getY() - (statusBarSize / 2));
+            }
+
+        });
+
+        // Add a key listener that will reset the game
+        setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if (event.getCode() == KeyCode.SPACE)
+                    chessBoard.resetGame();
+            }
+        });
+
+        statusBar.getResetButton().setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                // TODO Auto-generated method stub
+                chessBoard.resetGame();
+            }
+
+        });
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {

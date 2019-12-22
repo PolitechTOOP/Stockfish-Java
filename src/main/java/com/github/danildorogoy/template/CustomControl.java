@@ -10,6 +10,10 @@ import javafx.scene.input.MouseEvent;
 
 
 public class CustomControl extends Control {
+
+	private ChessBoard chessBoard;
+	private StatusBar statusBar;
+	private int statusBarSize = 100;
 	
 	//similar to previous custom controlls but must handle more
 	//complex mouse interactions and key interactions
@@ -56,8 +60,4 @@ public class CustomControl extends Control {
 		statusBar.resize(width, statusBarSize);
 		statusBar.setTranslateY(-(statusBarSize / 2));
 	}
-	
-	private ChessBoard chessBoard;
-	private StatusBar statusBar; 
-	private int statusBarSize = 100;
 }

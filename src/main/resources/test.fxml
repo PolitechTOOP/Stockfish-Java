@@ -6,15 +6,15 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane prefHeight="399.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.danildorogoy.template.Controller">
+<AnchorPane prefHeight="399.0" prefWidth="510.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.danildorogoy.template.TestControl">
    <children>
       <Label layoutX="120.0" layoutY="45.0" prefHeight="31.0" prefWidth="271.0" text="Выберите тип игры">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
-      <Button layoutX="120.0" layoutY="113.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="271.0" text="Игра для двух пользователей" />
-      <Button layoutX="120.0" layoutY="190.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="271.0" text="Игра с компьюетром белыми" />
-      <Button layoutX="120.0" layoutY="269.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="271.0" text="Игра с компьютером черными" />
+      <Button fx:id="userMode" layoutX="120.0" layoutY="113.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="271.0" text="Игра для двух пользователей" />
+      <Button fx:id="whiteMode" layoutX="120.0" layoutY="190.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="271.0" text="Игра с компьюетром белыми" />
+      <Button fx:id="blackMode" layoutX="120.0" layoutY="269.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="271.0" text="Игра с компьютером черными" />
    </children>
 </AnchorPane>
