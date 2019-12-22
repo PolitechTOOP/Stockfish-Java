@@ -6,11 +6,7 @@ import javafx.scene.image.ImageView;
 
 public class PieceRook extends Piece {
 
-    //	private int xPos;
-//	private int yPos;
-//	private int type;
     private Image image;
-//	private ImageView imageView = new ImageView(); 
 
     public PieceRook(int type, int xPos, int yPos) {
         super(type, xPos, yPos);
@@ -45,7 +41,8 @@ public class PieceRook extends Piece {
         chessBoard.colorSquare(this.xPos, this.yPos, true);
         if (chessBoard.checkState && !this.isASavior)
             return;
-        if (gameLogic.slashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type) || gameLogic.backslashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type))
+        if (gameLogic.slashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type) ||
+                gameLogic.backslashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type))
             return;
         if (!gameLogic.horizontalProtection(chessBoard, this.xPos, this.yPos, this.type)) {
             for (int y = this.yPos - 1; y >= 0; y--) {
