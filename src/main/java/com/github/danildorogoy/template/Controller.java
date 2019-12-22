@@ -1,9 +1,8 @@
-package com.github.danildorogoy;
+package com.github.danildorogoy.template;
 
 import com.github.danildorogoy.models.ChessPiece;
 import com.github.danildorogoy.models.Square;
 import javafx.application.Platform;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
@@ -27,11 +26,9 @@ public class Controller implements Initializable {
     private boolean isFirstClick = false;
     private String fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     private String move = "";
-    private static final Log log = LogFactory.getLog(Main.class);
+    private static final Log log = LogFactory.getLog(ChessApplication.class);
     private Map<String, Square> map = new HashMap<>(64);
-
-    @FXML
-    private GridPane gridpane;
+    private GridPane gridPane;
 
 
     @Override
@@ -41,7 +38,6 @@ public class Controller implements Initializable {
                 map.put(i + "" + j, new Square((i + j) % 2 == 0, ((char) ('a' + i) + "" + (8 - j))));
             }
         }
-        addGridEvent();
     }
 
     private void mouseEntered(MouseEvent event) {
@@ -58,7 +54,7 @@ public class Controller implements Initializable {
             isFirstClick = false;
             CompletableFuture<String> resultFuture = new CompletableFuture<>();
             log.info(move);
-            Main.client.submit(new Query.Builder(QueryType.Make_Move, fen)
+            ChessApplication.client.submit(new Query.Builder(QueryType.Make_Move, fen)
                     .setMove(move).build(), resultFuture::complete);
 
             try {
@@ -68,7 +64,7 @@ public class Controller implements Initializable {
             }
             resultFuture = new CompletableFuture<>();
             log.info(fen);
-            Main.client.submit(new Query.Builder(QueryType.Best_Move, fen)
+            ChessApplication.client.submit(new Query.Builder(QueryType.Best_Move, fen)
                     .build(), resultFuture::complete);
             try {
                 move = resultFuture.get();
@@ -78,7 +74,7 @@ public class Controller implements Initializable {
             }
             resultFuture = new CompletableFuture<>();
             log.info(move);
-            Main.client.submit(new Query.Builder(QueryType.Make_Move, fen)
+            ChessApplication.client.submit(new Query.Builder(QueryType.Make_Move, fen)
                     .setMove(move).build(), resultFuture::complete);
             move = "";
 
@@ -97,34 +93,12 @@ public class Controller implements Initializable {
         log.info(String.format("Mouse entered cell [%d, %d]%n", colIndex, rowIndex));
     }
 
-    private void addGridEvent() {
-        gridpane.getChildren().forEach(item -> {
-           /* Integer colIndex = GridPane.getColumnIndex(item);
-            Integer rowIndex = GridPane.getRowIndex(item);
-            colIndex = colIndex == null ? 0 : colIndex;
-            rowIndex = rowIndex == null ? 0 : rowIndex;
-            Integer finalColIndex = colIndex;
-            Integer finalRowIndex = rowIndex;
-            for (String[] a : parserFen(fen)) {
-                log.info(Arrays.toString(a));
-            }
-
-            String[][] board = parserFen(fen);
-
-            Platform.runLater(() -> gridpane.add(
-                    new ImageView(ChessPiece.getChessPiece(board[finalRowIndex][finalColIndex]).getImg()),
-                    finalColIndex, finalRowIndex));*/
-            item.setOnMouseClicked(this::mouseEntered);
-        });
-        initDisplay(fen);
-    }
-
     private void display(String fen) {
         String[][] board = parserFen(fen);
         for (String[] a : parserFen(fen)) {
             log.info(Arrays.toString(a));
         }
-        gridpane.getChildren().forEach(item -> {
+        gridPane.getChildren().forEach(item -> {
             Integer colIndex = GridPane.getColumnIndex(item);
             Integer rowIndex = GridPane.getRowIndex(item);
             colIndex = colIndex == null ? 0 : colIndex;
@@ -135,43 +109,20 @@ public class Controller implements Initializable {
 
             String url = ChessPiece.getChessPiece(board[finalRowIndex][finalColIndex]).getImg();
             if (!url.isEmpty()) {
-                Platform.runLater(() -> gridpane.add(
+                Platform.runLater(() -> gridPane.add(
                         new ImageView(url),
                         finalColIndex, finalRowIndex));
             } else {
                 Platform.runLater(() -> {
 
                     if (item instanceof ImageView) {
-                        gridpane.getChildren().remove(item);
+                        gridPane.getChildren().remove(item);
                     }
                 });
             }
         });
     }
 
-
-    private void initDisplay(String fen) {
-        String[][] board = parserFen(fen);
-        for (String[] a : parserFen(fen)) {
-            log.info(Arrays.toString(a));
-        }
-        gridpane.getChildren().forEach(item -> {
-            Integer colIndex = GridPane.getColumnIndex(item);
-            Integer rowIndex = GridPane.getRowIndex(item);
-            colIndex = colIndex == null ? 0 : colIndex;
-            rowIndex = rowIndex == null ? 0 : rowIndex;
-            int finalColIndex = colIndex;
-            int finalRowIndex = rowIndex;
-
-
-            String url = ChessPiece.getChessPiece(board[finalRowIndex][finalColIndex]).getImg();
-            if (!url.isEmpty()) {
-                Platform.runLater(() -> gridpane.add(
-                        new ImageView(url),
-                        finalColIndex, finalRowIndex));
-            }
-        });
-    }
 
     private String[][] parserFen(String fen) {
         fen = fen.substring(0, fen.indexOf(' '));
