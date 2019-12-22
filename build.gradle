@@ -2,6 +2,8 @@
 
 
 plugins {
+    id 'org.springframework.boot' version '2.0.5.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.7.RELEASE'
     id 'application'
     id 'idea'
     id 'java'
@@ -43,6 +45,9 @@ test {
 }
 
 dependencies {
+    compile 'org.springframework:spring-core'
+    compile 'org.springframework:spring-beans'
+    compile 'org.springframework:spring-context'
     compile 'log4j:log4j:1.2.17'
     compile 'commons-logging:commons-logging:1.2'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'

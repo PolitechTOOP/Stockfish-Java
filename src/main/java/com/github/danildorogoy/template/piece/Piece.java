@@ -1,5 +1,6 @@
 package com.github.danildorogoy.template.piece;
 
+import com.github.danildorogoy.controller.ComputerController;
 import com.github.danildorogoy.template.board.ChessBoard;
 import com.github.danildorogoy.template.GameLogic;
 import javafx.scene.Group;
@@ -17,14 +18,14 @@ public abstract class Piece extends Group {
      * Piece can be either white (1) or black (2)
      */
     protected int type;
-	/**
-	 * 	Position of the piece on the board
-	 */
+    /**
+     * Position of the piece on the board
+     */
     protected int xPos;
     protected int yPos;
-	/**
-	 * Name of the piece
-	 */
+    /**
+     * Name of the piece
+     */
     protected String name;
     // ImageView
     protected ImageView imageView = new ImageView();
@@ -37,7 +38,7 @@ public abstract class Piece extends Group {
     // Variable to know if the piece can move in a check situation
     protected boolean isASavior = false;
 
-    public Piece(int type, int xPos, int yPos) {
+    public Piece(int type, int xPos, int yPos, ComputerController controller) {
         this.type = type;
         this.xPos = xPos;
         this.yPos = yPos;

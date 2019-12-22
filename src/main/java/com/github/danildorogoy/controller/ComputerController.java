@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 import xyz.niflheim.stockfish.engine.StockfishClient;
 import xyz.niflheim.stockfish.engine.enums.Query;
 import xyz.niflheim.stockfish.engine.enums.QueryType;
@@ -19,23 +20,20 @@ import xyz.niflheim.stockfish.exceptions.StockfishInitException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-
-public class Controller extends Control {
+@Component
+public class ComputerController extends Control {
 
     private ChessBoard chessBoard;
-    private StatusBar statusBar;
     private boolean isFirstClick = false;
     private String fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     private String move = "";
-    private boolean isWhite;
-    private static final Log log = LogFactory.getLog(Controller .class);
+    private static final Log log = LogFactory.getLog(ComputerController.class);
     public static StockfishClient client = null;
 
-    public Controller(boolean isWhite) {
-        this.isWhite = isWhite;
+    public ComputerController() {
         setSkin(new ControllerSkin(this));
 
-        statusBar = new StatusBar();
+        StatusBar statusBar = new StatusBar();
         chessBoard = new ChessBoard(statusBar);
         getChildren().addAll(statusBar, chessBoard);
 
@@ -66,7 +64,7 @@ public class Controller extends Control {
     }
 
     public void mouseClick(CustomEvent event) {
-        event.getChessPieceEnum();
+
     }
 
     private void mouseEntered(MouseEvent event) {

@@ -6,8 +6,10 @@ package com.github.danildorogoy.controller;
 //imports 
 import javafx.scene.control.Skin;
 import javafx.scene.control.SkinBase;
+import org.springframework.stereotype.Component;
 
-//class definition 
+//class definition
+@Component
 class CustomControlSkin extends SkinBase<CustomControl> implements Skin<CustomControl> {
 	public CustomControlSkin(CustomControl cc) {
 		//call the super class constructor

@@ -1,5 +1,6 @@
 package com.github.danildorogoy.template.piece;
 
+import com.github.danildorogoy.controller.ComputerController;
 import com.github.danildorogoy.template.board.ChessBoard;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,8 +9,8 @@ public class PiecePawn extends Piece {
 
     private Image image;
 
-    public PiecePawn(int type, int xPos, int yPos) {
-        super(type, xPos, yPos);
+    public PiecePawn(int type, int xPos, int yPos, ComputerController controller) {
+        super(type, xPos, yPos, controller);
         name = "Pawn";
         // TODO Auto-generated constructor stub
         // TODO tester les paramètres

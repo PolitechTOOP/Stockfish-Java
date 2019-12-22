@@ -10,8 +10,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.stereotype.Component;
 
-
+@Component
 public class CustomControl extends Control {
 
 	private ChessBoard chessBoard;
@@ -27,22 +28,16 @@ public class CustomControl extends Control {
 		chessBoard = new ChessBoard(statusBar);
 		getChildren().addAll(statusBar, chessBoard);
 		
-		setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				// TODO Auto-generated method stub
-				log.info(event.getX() +" "+ event.getY());
-				chessBoard.selectPiece(event.getX(), event.getY() - (statusBarSize / 2));
-			}
+		setOnMouseClicked(event -> {
+			// TODO Auto-generated method stub
+			log.info(event.getX() +" "+ event.getY());
+			chessBoard.selectPiece(event.getX(), event.getY() - (statusBarSize / 2));
 		});
 
 		// Add a key listener that will reset the game
-		setOnKeyPressed(new EventHandler<KeyEvent>() {
-			@Override
-			public void handle(KeyEvent event) {
-				if (event.getCode() == KeyCode.SPACE)
-					chessBoard.resetGame();
-			}
+		setOnKeyPressed(event -> {
+			if (event.getCode() == KeyCode.SPACE)
+				chessBoard.resetGame();
 		});
 		
 		statusBar.getResetButton().setOnAction(new EventHandler<ActionEvent>() {

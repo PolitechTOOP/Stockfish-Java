@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import com.github.danildorogoy.controller.ComputerController;
 import com.github.danildorogoy.template.GameLogic;
 import com.github.danildorogoy.template.piece.*;
 import javafx.animation.Timeline;
@@ -15,8 +16,14 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ChessBoard extends Pane {
+
+    @Autowired
+    private ComputerController computerController;
 
     // private fields
     private int boardWidth = 8;
@@ -145,40 +152,40 @@ public class ChessBoard extends Pane {
     public void initPiece() {
         // Initialize the pieces and put it on the board
         // BLACK Pieces
-        rook_2_1 = new PieceRook(2, 0, 0);
-        knight_2_1 = new PieceKnight(2, 1, 0);
-        bishop_2_1 = new PieceBishop(2, 2, 0);
-        queen_2 = new PieceQueen(2, 3, 0);
-        king_2 = new PieceKing(2, 4, 0);
-        bishop_2_2 = new PieceBishop(2, 5, 0);
-        knight_2_2 = new PieceKnight(2, 6, 0);
-        rook_2_2 = new PieceRook(2, 7, 0);
-        pawn_2_1 = new PiecePawn(2, 0, 1);
-        pawn_2_2 = new PiecePawn(2, 1, 1);
-        pawn_2_3 = new PiecePawn(2, 2, 1);
-        pawn_2_4 = new PiecePawn(2, 3, 1);
-        pawn_2_5 = new PiecePawn(2, 4, 1);
-        pawn_2_6 = new PiecePawn(2, 5, 1);
-        pawn_2_7 = new PiecePawn(2, 6, 1);
-        pawn_2_8 = new PiecePawn(2, 7, 1);
+        rook_2_1 = new PieceRook(2, 0, 0, computerController);
+        knight_2_1 = new PieceKnight(2, 1, 0, computerController);
+        bishop_2_1 = new PieceBishop(2, 2, 0, computerController);
+        queen_2 = new PieceQueen(2, 3, 0, computerController);
+        king_2 = new PieceKing(2, 4, 0, computerController);
+        bishop_2_2 = new PieceBishop(2, 5, 0, computerController);
+        knight_2_2 = new PieceKnight(2, 6, 0, computerController);
+        rook_2_2 = new PieceRook(2, 7, 0, computerController);
+        pawn_2_1 = new PiecePawn(2, 0, 1, computerController);
+        pawn_2_2 = new PiecePawn(2, 1, 1, computerController);
+        pawn_2_3 = new PiecePawn(2, 2, 1, computerController);
+        pawn_2_4 = new PiecePawn(2, 3, 1, computerController);
+        pawn_2_5 = new PiecePawn(2, 4, 1, computerController);
+        pawn_2_6 = new PiecePawn(2, 5, 1, computerController);
+        pawn_2_7 = new PiecePawn(2, 6, 1, computerController);
+        pawn_2_8 = new PiecePawn(2, 7, 1, computerController);
 
         //WHITE Pieces
-        rook_1_1 = new PieceRook(1, 0, 7);
-        knight_1_1 = new PieceKnight(1, 1, 7);
-        bishop_1_1 = new PieceBishop(1, 2, 7);
-        queen_1 = new PieceQueen(1, 3, 7);
-        king_1 = new PieceKing(1, 4, 7);
-        bishop_1_2 = new PieceBishop(1, 5, 7);
-        knight_1_2 = new PieceKnight(1, 6, 7);
-        rook_1_2 = new PieceRook(1, 7, 7);
-        pawn_1_1 = new PiecePawn(1, 0, 6);
-        pawn_1_2 = new PiecePawn(1, 1, 6);
-        pawn_1_3 = new PiecePawn(1, 2, 6);
-        pawn_1_4 = new PiecePawn(1, 3, 6);
-        pawn_1_5 = new PiecePawn(1, 4, 6);
-        pawn_1_6 = new PiecePawn(1, 5, 6);
-        pawn_1_7 = new PiecePawn(1, 6, 6);
-        pawn_1_8 = new PiecePawn(1, 7, 6);
+        rook_1_1 = new PieceRook(1, 0, 7, computerController);
+        knight_1_1 = new PieceKnight(1, 1, 7, computerController);
+        bishop_1_1 = new PieceBishop(1, 2, 7, computerController);
+        queen_1 = new PieceQueen(1, 3, 7, computerController);
+        king_1 = new PieceKing(1, 4, 7, computerController);
+        bishop_1_2 = new PieceBishop(1, 5, 7, computerController);
+        knight_1_2 = new PieceKnight(1, 6, 7, computerController);
+        rook_1_2 = new PieceRook(1, 7, 7, computerController);
+        pawn_1_1 = new PiecePawn(1, 0, 6, computerController);
+        pawn_1_2 = new PiecePawn(1, 1, 6, computerController);
+        pawn_1_3 = new PiecePawn(1, 2, 6, computerController);
+        pawn_1_4 = new PiecePawn(1, 3, 6, computerController);
+        pawn_1_5 = new PiecePawn(1, 4, 6, computerController);
+        pawn_1_6 = new PiecePawn(1, 5, 6, computerController);
+        pawn_1_7 = new PiecePawn(1, 6, 6, computerController);
+        pawn_1_8 = new PiecePawn(1, 7, 6, computerController);
 
         pieces[0][0] = rook_2_1;
         pieces[1][0] = knight_2_1;
@@ -417,7 +424,7 @@ public class ChessBoard extends Pane {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == buttonRook) {
-            promotedPiece = new PieceRook(piece.getType(), piece.getX(), piece.getY());
+            promotedPiece = new PieceRook(piece.getType(), piece.getX(), piece.getY(), computerController);
             getChildren().remove(piece.getImage());
             getChildren().add(promotedPiece.getImage());
             pieces[piece.getX()][piece.getY()] = promotedPiece;
@@ -426,7 +433,7 @@ public class ChessBoard extends Pane {
             else
                 playerTwoRook++;
         } else if (result.get() == buttonKnight) {
-            promotedPiece = new PieceKnight(piece.getType(), piece.getX(), piece.getY());
+            promotedPiece = new PieceKnight(piece.getType(), piece.getX(), piece.getY(), computerController);
             getChildren().remove(piece.getImage());
             getChildren().add(promotedPiece.getImage());
             pieces[piece.getX()][piece.getY()] = promotedPiece;
@@ -435,7 +442,7 @@ public class ChessBoard extends Pane {
             else
                 playerTwoKnight++;
         } else if (result.get() == buttonBishop) {
-            promotedPiece = new PieceBishop(piece.getType(), piece.getX(), piece.getY());
+            promotedPiece = new PieceBishop(piece.getType(), piece.getX(), piece.getY(), computerController);
             getChildren().remove(piece.getImage());
             getChildren().add(promotedPiece.getImage());
             pieces[piece.getX()][piece.getY()] = promotedPiece;
@@ -451,7 +458,7 @@ public class ChessBoard extends Pane {
                     playerTwoBishopDarkSquare++;
             }
         } else if (result.get() == buttonQueen) {
-            promotedPiece = new PieceQueen(piece.getType(), piece.getX(), piece.getY());
+            promotedPiece = new PieceQueen(piece.getType(), piece.getX(), piece.getY(), computerController);
             getChildren().remove(piece.getImage());
             getChildren().add(promotedPiece.getImage());
             pieces[piece.getX()][piece.getY()] = promotedPiece;

@@ -1,5 +1,6 @@
 package com.github.danildorogoy.template.piece;
 
+import com.github.danildorogoy.controller.ComputerController;
 import com.github.danildorogoy.template.board.ChessBoard;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -9,8 +10,8 @@ public class PieceKing extends Piece {
 
     private Image image;
 
-    public PieceKing(int type, int xPos, int yPos) {
-        super(type, xPos, yPos);
+    public PieceKing(int type, int xPos, int yPos, ComputerController controller) {
+        super(type, xPos, yPos, controller);
         name = "King";
         // TODO Auto-generated constructor stub
 

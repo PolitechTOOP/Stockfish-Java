@@ -1,5 +1,7 @@
 package com.github.danildorogoy.template.piece;
 
+import com.github.danildorogoy.controller.ComputerController;
+import com.github.danildorogoy.template.CustomEvent;
 import com.github.danildorogoy.template.board.ChessBoard;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -8,8 +10,8 @@ public class PieceBishop extends Piece {
 
     private Image image;
 
-    public PieceBishop(int type, int xPos, int yPos) {
-        super(type, xPos, yPos);
+    public PieceBishop(int type, int xPos, int yPos, ComputerController controller) {
+        super(type, xPos, yPos, controller);
         name = "Bishop";
         // TODO Auto-generated constructor stub
         if (type == 1) {
@@ -29,6 +31,9 @@ public class PieceBishop extends Piece {
             imageView.setSmooth(true);
             imageView.setCache(true);
         }
+        setOnMouseClicked(mouseEvent -> {
+            controller.mouseClick(new CustomEvent("", ChessPieceEnum.BLACK_BISHOP));
+        });
     }
 
     @Override
