@@ -10,16 +10,13 @@ import org.apache.commons.logging.LogFactory;
 
 public class Window extends Group {
 
-    // private fields of the class
     private Rectangle r;
-    private Translate pos;        //translate to set the position of this window
+    private Translate pos;
     private boolean isHighlighted = false;
     private final Log log = LogFactory.getLog(Window.class);
     private final String coords;
 
-    // constructor for the class
     public Window(boolean isBlack, String id) {
-        // Make a new Rectangle and Translate, add the Translate to the Rectangle, add the Rectagle to the Group
         pos = new Translate();
         r = new Rectangle();
         coords = id;
@@ -36,19 +33,15 @@ public class Window extends Group {
         getChildren().add(r);
     }
 
-    // overridden version of the resize method
     @Override
     public void resize(double width, double height) {
-        // call the super class method and update the height and the width of the rectangle representing the window
         super.resize(width, height);
         r.setHeight(height);
         r.setWidth(width);
     }
 
-    // overridden version of the relocate method
     @Override
     public void relocate(double x, double y) {
-        // call the superclass method and update the relevant transform
         super.relocate(x, y);
         pos.setX(x);
         pos.setY(y);

@@ -1,6 +1,7 @@
 package com.github.danildorogoy.controller;
 
 import com.github.danildorogoy.ChessApplication;
+import com.github.danildorogoy.template.CustomEvent;
 import com.github.danildorogoy.template.board.ChessBoard;
 import com.github.danildorogoy.template.board.StatusBar;
 import javafx.scene.Node;
@@ -15,8 +16,6 @@ import xyz.niflheim.stockfish.engine.enums.Query;
 import xyz.niflheim.stockfish.engine.enums.QueryType;
 import xyz.niflheim.stockfish.exceptions.StockfishInitException;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -28,8 +27,8 @@ public class Controller extends Control {
     private boolean isFirstClick = false;
     private String fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     private String move = "";
+    private boolean isWhite;
     private static final Log log = LogFactory.getLog(Controller .class);
-    private boolean isWhite; // True if player plays White
     public static StockfishClient client = null;
 
     public Controller(boolean isWhite) {
@@ -51,7 +50,8 @@ public class Controller extends Control {
 
         // TODO Auto-generated method stub
         //chessBoard.selectPiece(event.getX(), event.getY());
-        setOnMouseClicked(this::mouseEntered);
+//        setOnMouseClicked(this::mouseEntered);
+
 
         // Add a key listener that will reset the game
         setOnKeyPressed(event -> {
@@ -63,6 +63,10 @@ public class Controller extends Control {
             // TODO Auto-generated method stub
             chessBoard.resetGame();
         });
+    }
+
+    public void mouseClick(CustomEvent event) {
+        event.getChessPieceEnum();
     }
 
     private void mouseEntered(MouseEvent event) {

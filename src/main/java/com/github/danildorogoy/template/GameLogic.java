@@ -60,9 +60,7 @@ public class GameLogic {
         else if ((chessBoard.playerOneBishopDarkSquare != 0 && chessBoard.playerOneBishopLightSquare != 0) ||
                 (chessBoard.playerTwoBishopDarkSquare != 0 && chessBoard.playerTwoBishopLightSquare != 0))
             return false;
-        else if (chessBoard.playerOnePawn > 1 || chessBoard.playerTwoPawn > 1)
-            return false;
-        return true;
+        else return chessBoard.playerOnePawn <= 1 && chessBoard.playerTwoPawn <= 1;
     }
 
     public boolean isStalemate(ChessBoard chessBoard, Piece king, int type) {
@@ -76,7 +74,7 @@ public class GameLogic {
     // Method to check if a piece is protecting the king from a check
     public boolean verticalProtection(ChessBoard chessBoard, int xPos, int yPos, int type) {
         int y = 0;
-        int enemyType = 0;
+        int enemyType;
         if (type == 1)
             enemyType = 2;
         else
@@ -123,7 +121,7 @@ public class GameLogic {
 
     public boolean horizontalProtection(ChessBoard chessBoard, int xPos, int yPos, int type) {
         int x = 0;
-        int enemyType = 0;
+        int enemyType;
         if (type == 1)
             enemyType = 2;
         else
@@ -169,7 +167,7 @@ public class GameLogic {
     }
 
     public boolean slashDiagonalProtection(ChessBoard chessBoard, int xPos, int yPos, int type) {
-        int enemyType = 0;
+        int enemyType;
         if (type == 1)
             enemyType = 2;
         else
@@ -219,7 +217,7 @@ public class GameLogic {
     }
 
     public boolean backslashDiagonalProtection(ChessBoard chessBoard, int xPos, int yPos, int type) {
-        int enemyType = 0;
+        int enemyType;
         if (type == 1)
             enemyType = 2;
         else
@@ -270,9 +268,9 @@ public class GameLogic {
 
     // Method to check check
     public boolean isCheck(ChessBoard chessBoard, int xPos, int yPos, int type, boolean kingCanCapture) {
-        int y = 0;
-        int x = 0;
-        int enemyType = 0;
+        int y;
+        int x;
+        int enemyType;
         if (type == 1)
             enemyType = 2;
         else
@@ -314,7 +312,7 @@ public class GameLogic {
                 break;
             else if (chessBoard.getBoardPosition(xPos, y) == enemyType) {
                 if (y == yPos - 1 && chessBoard.getPiece(xPos, y) != null && kingCanCapture &&
-                        chessBoard.getPiece(xPos, y).getName() == "King")
+                        chessBoard.getPiece(xPos, y).getName().equals("King"))
                     return true;
                 else if (chessBoard.getPiece(xPos, y) != null && (chessBoard.getPiece(xPos, y).
                         getName().equals("Queen") || chessBoard.getPiece(xPos, y).getName().equals("Rook")))
@@ -431,9 +429,9 @@ public class GameLogic {
 
     // Method to find all the piece that create a check
     public void findAllCheckPieces(ChessBoard chessBoard, int xPos, int yPos, int type) {
-        int y = 0;
-        int x = 0;
-        int enemyType = 0;
+        int y;
+        int x;
+        int enemyType;
         if (type == 1)
             enemyType = 2;
         else
@@ -574,9 +572,9 @@ public class GameLogic {
 
     // Method to find all the piece that can save the king from a checkmate
     public void findAllSaviorPieces(ChessBoard chessBoard, int xPos, int yPos, int type, boolean protect) {
-        int y = 0;
-        int x = 0;
-        int enemyType = 0;
+        int y;
+        int x;
+        int enemyType;
         if (type == 1)
             enemyType = 2;
         else
