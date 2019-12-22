@@ -51,7 +51,7 @@ public class Controller extends Control implements Initializable{
             @Override
             public void handle(MouseEvent event) {
                 // TODO Auto-generated method stub
-                chessBoard.selectPiece(event.getX(), event.getY() - (statusBarSize / 2));
+                chessBoard.selectPiece(event.getX(), event.getY());
             }
 
         });
