@@ -64,9 +64,6 @@ public class ChessApplication extends Application {
 	@Override
 	public void stop() {
 		log.info("Close");
-		if (client != null) {
-			client.close();
-		}
 	}
 	
 	// entry point into our program to launch our JavaFX application

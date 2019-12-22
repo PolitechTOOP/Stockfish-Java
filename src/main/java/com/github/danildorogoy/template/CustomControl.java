@@ -7,6 +7,8 @@ import javafx.scene.control.Control;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 
 public class CustomControl extends Control {
@@ -14,7 +16,7 @@ public class CustomControl extends Control {
 	private ChessBoard chessBoard;
 	private StatusBar statusBar;
 	private int statusBarSize = 100;
-	
+	private static final Log log = LogFactory.getLog(CustomControl .class);
 	//similar to previous custom controlls but must handle more
 	//complex mouse interactions and key interactions
 	public CustomControl(){
@@ -28,9 +30,9 @@ public class CustomControl extends Control {
 			@Override
 			public void handle(MouseEvent event) {
 				// TODO Auto-generated method stub
+				log.info(event.getX() +" "+ event.getY());
 				chessBoard.selectPiece(event.getX(), event.getY() - (statusBarSize / 2));
 			}
-			
 		});
 
 		// Add a key listener that will reset the game

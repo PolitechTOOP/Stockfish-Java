@@ -8,18 +8,23 @@ import javafx.scene.transform.Translate;
 
 public class Window extends Group {
 
+    // private fields of the class
+    private Rectangle r;
+    private Translate pos;        //translate to set the position of this window
+    private boolean isHighlighted = false;
 
     // constructor for the class
-    public Window(int i) {
+    public Window(boolean isBlack, String id) {
         // Make a new Rectangle and Translate, add the Translate to the Rectangle, add the Rectagle to the Group
         pos = new Translate();
         r = new Rectangle();
+//        r.setId(id);
         r.getTransforms().add(pos);
-        if (i == 0)
+        if (isBlack) {
             r.setFill(Color.GREY);
-        else
+        } else {
             r.setFill(Color.WHITE);
-
+        }
         getChildren().add(r);
     }
 
@@ -62,8 +67,4 @@ public class Window extends Group {
         return (r);
     }
 
-    // private fields of the class
-    private Rectangle r;
-    private Translate pos;        //translate to set the position of this window
-    private boolean isHighlighted = false;
 }

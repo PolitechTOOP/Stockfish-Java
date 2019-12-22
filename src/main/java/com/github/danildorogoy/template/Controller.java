@@ -5,7 +5,6 @@ import com.github.danildorogoy.models.Square;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Control;
 import javafx.scene.image.ImageView;
@@ -15,30 +14,28 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import xyz.niflheim.stockfish.engine.StockfishClient;
 import xyz.niflheim.stockfish.engine.enums.Query;
 import xyz.niflheim.stockfish.engine.enums.QueryType;
-
-import java.net.URL;
+import xyz.niflheim.stockfish.exceptions.StockfishInitException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
 
-public class Controller extends Control implements Initializable{
+public class Controller extends Control {
 
     private ChessBoard chessBoard;
     private StatusBar statusBar;
-    private int statusBarSize = 100;
     private boolean isFirstClick = false;
     private String fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     private String move = "";
-    private static final Log log = LogFactory.getLog(ChessApplication.class);
+    private static final Log log = LogFactory.getLog(Controller .class);
     private Map<String, Square> map = new HashMap<>(64);
-    private GridPane gridPane;
     private boolean isWhite; // True if player plays White
+    public static StockfishClient client = null;
 
 
     public Controller(boolean isWhite) {
@@ -49,11 +46,21 @@ public class Controller extends Control implements Initializable{
         chessBoard = new ChessBoard(statusBar);
         getChildren().addAll(statusBar, chessBoard);
 
+        try {
+            client = new StockfishClient.Builder().build();
+        } catch (StockfishInitException e) {
+            log.error(e);
+            if (client != null) {
+                client.close();
+            }
+        }
+
         setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
                 // TODO Auto-generated method stub
-                chessBoard.selectPiece(event.getX(), event.getY());
+                //chessBoard.selectPiece(event.getX(), event.getY());
+                mouseEntered(event);
             }
 
         });
@@ -78,15 +85,6 @@ public class Controller extends Control implements Initializable{
         });
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
-                map.put(i + "" + j, new Square((i + j) % 2 == 0, ((char) ('a' + i) + "" + (8 - j))));
-            }
-        }
-    }
-
     private void mouseEntered(MouseEvent event) {
         Node source = (Node) event.getSource();
         Integer colIndex = GridPane.getColumnIndex(source);
@@ -97,6 +95,8 @@ public class Controller extends Control implements Initializable{
 
         log.info(event);
         if (isFirstClick) {
+            log.info(event.getX()+" "+event.getY());
+            chessBoard.selectPiece(event.getX(), event.getY());;
             move += map.get(colIndex + "" + rowIndex).getCoord();
             isFirstClick = false;
             CompletableFuture<String> resultFuture = new CompletableFuture<>();
@@ -132,15 +132,15 @@ public class Controller extends Control implements Initializable{
                 log.error(e);
             }
             log.info(fen);
-            display(fen);
+            //display(fen);
         } else {
-            move = map.get(colIndex + "" + rowIndex).getCoord();
+            move = String.valueOf(event.getX()+event.getY());
             isFirstClick = true;
         }
         log.info(String.format("Mouse entered cell [%d, %d]%n", colIndex, rowIndex));
     }
 
-    private void display(String fen) {
+    /*private void display(String fen) {
         String[][] board = parserFen(fen);
         for (String[] a : parserFen(fen)) {
             log.info(Arrays.toString(a));
@@ -168,7 +168,7 @@ public class Controller extends Control implements Initializable{
                 });
             }
         });
-    }
+    }*/
 
 
     private String[][] parserFen(String fen) {
@@ -193,4 +193,9 @@ public class Controller extends Control implements Initializable{
         return board;
     }
 
+    public void stop() {
+        if (client != null) {
+            client.close();
+        }
+    }
 }
