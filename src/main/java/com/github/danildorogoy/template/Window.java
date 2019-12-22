@@ -1,10 +1,13 @@
 package com.github.danildorogoy.template;
 
+import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.transform.Translate;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class Window extends Group {
 
@@ -12,19 +15,25 @@ public class Window extends Group {
     private Rectangle r;
     private Translate pos;        //translate to set the position of this window
     private boolean isHighlighted = false;
+    private final Log log = LogFactory.getLog(Window.class);
+    private final String coords;
 
     // constructor for the class
     public Window(boolean isBlack, String id) {
         // Make a new Rectangle and Translate, add the Translate to the Rectangle, add the Rectagle to the Group
         pos = new Translate();
         r = new Rectangle();
-//        r.setId(id);
+        coords = id;
         r.getTransforms().add(pos);
         if (isBlack) {
             r.setFill(Color.GREY);
         } else {
             r.setFill(Color.WHITE);
         }
+        setOnMouseClicked(mouseEvent -> {
+            log.info(mouseEvent);
+            log.info("Clicked! " + coords);
+        });
         getChildren().add(r);
     }
 

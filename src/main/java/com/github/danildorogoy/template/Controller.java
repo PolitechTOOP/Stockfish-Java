@@ -54,33 +54,19 @@ public class Controller extends Control {
             }
         }
 
-        setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                // TODO Auto-generated method stub
-                //chessBoard.selectPiece(event.getX(), event.getY());
-                mouseEntered(event);
-            }
-
-        });
+        // TODO Auto-generated method stub
+        //chessBoard.selectPiece(event.getX(), event.getY());
+        setOnMouseClicked(this::mouseEntered);
 
         // Add a key listener that will reset the game
-        setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                if (event.getCode() == KeyCode.SPACE)
-                    chessBoard.resetGame();
-            }
+        setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.SPACE)
+                chessBoard.resetGame();
         });
 
-        statusBar.getResetButton().setOnAction(new EventHandler<ActionEvent>() {
-
-            @Override
-            public void handle(ActionEvent event) {
-                // TODO Auto-generated method stub
-                chessBoard.resetGame();
-            }
-
+        statusBar.getResetButton().setOnAction(event -> {
+            // TODO Auto-generated method stub
+            chessBoard.resetGame();
         });
     }
 

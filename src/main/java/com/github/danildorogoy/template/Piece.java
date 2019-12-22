@@ -40,6 +40,7 @@ public abstract class Piece extends Group {
         this.xPos = xPos;
         this.yPos = yPos;
         isFirstTime = true;
+        setOnMouseClicked();
     }
 
     // Select method: When a piece is selected by a first click
