@@ -14,7 +14,7 @@ public enum ChessPiece {
     WHITE_QUEEN("Q", "wQueen.png"),
     BLACK_KING("k", "bKing.png"),
     WHITE_KING("K", "wKing.png"),
-    NONE("none","");
+    NONE("none", "");
 
     private final String img;
 
@@ -33,21 +33,34 @@ public enum ChessPiece {
         return title;
     }
 
-    public static ChessPiece getChessPiece(String fenStr){
+    public static ChessPiece getChessPiece(String fenStr) {
         switch (fenStr) {
-            case "p": return BLACK_PAWN;
-            case "r": return BLACK_ROOK;
-            case "n": return BLACK_KNIGHT;
-            case "b": return BLACK_BISHOP;
-            case "q": return BLACK_QUEEN;
-            case "k": return BLACK_KING;
-            case "P": return WHITE_PAWN;
-            case "R": return WHITE_ROOK;
-            case "N": return WHITE_KNIGHT;
-            case "B": return WHITE_BISHOP;
-            case "Q": return WHITE_QUEEN;
-            case "K": return WHITE_KING;
-            default: return NONE;
+            case "p":
+                return BLACK_PAWN;
+            case "r":
+                return BLACK_ROOK;
+            case "n":
+                return BLACK_KNIGHT;
+            case "b":
+                return BLACK_BISHOP;
+            case "q":
+                return BLACK_QUEEN;
+            case "k":
+                return BLACK_KING;
+            case "P":
+                return WHITE_PAWN;
+            case "R":
+                return WHITE_ROOK;
+            case "N":
+                return WHITE_KNIGHT;
+            case "B":
+                return WHITE_BISHOP;
+            case "Q":
+                return WHITE_QUEEN;
+            case "K":
+                return WHITE_KING;
+            default:
+                return NONE;
         }
     }
 }

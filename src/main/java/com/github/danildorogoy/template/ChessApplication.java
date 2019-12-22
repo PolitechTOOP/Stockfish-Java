@@ -56,25 +56,25 @@ public class ChessApplication extends Application {
 	@Override
 	public void start(Stage primaryStage) throws IOException {
 		// set the title and scene, and show the stage
-		/*log.info("Hello World");
+		log.info("Hello World");
 		primaryStage.setTitle("Chess game");
 		primaryStage.setScene(new Scene(sp_mainlayout, 600, 700));
 		primaryStage.setMinWidth(300);
 		primaryStage.setMinHeight(300);
-		primaryStage.show();*/
-		Parent root = null;
-
-		root = FXMLLoader.load(getClass().getResource("/test.fxml"));
-
-		Scene scene = new Scene(root);
-
-		primaryStage.setScene(scene);
-
-		primaryStage.setTitle("Hello!");
-		primaryStage.setWidth(primaryStage.getMaxWidth());
-		primaryStage.setHeight(primaryStage.getMaxHeight());
-
 		primaryStage.show();
+//		Parent root = null;
+//
+//		root = FXMLLoader.load(getClass().getResource("/test.fxml"));
+//
+//		Scene scene = new Scene(root);
+//
+//		primaryStage.setScene(scene);
+//
+//		primaryStage.setTitle("Hello!");
+//		primaryStage.setWidth(primaryStage.getMaxWidth());
+//		primaryStage.setHeight(primaryStage.getMaxHeight());
+//
+//		primaryStage.show();
 	}
 
 	@Override
