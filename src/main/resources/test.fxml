@@ -14,7 +14,7 @@
          </font>
       </Label>
       <Button fx:id="userMode" layoutX="120.0" layoutY="113.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="271.0" text="Игра для двух пользователей" />
-      <Button fx:id="whiteMode" layoutX="120.0" layoutY="190.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="271.0" text="Игра с компьюетром белыми" />
+      <Button fx:id="whiteMode" layoutX="120.0" layoutY="190.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="271.0" text="Игра с компьютером белыми" />
       <Button fx:id="blackMode" layoutX="120.0" layoutY="269.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="271.0" text="Игра с компьютером черными" />
    </children>
 </AnchorPane>

@@ -99,8 +99,6 @@ public class ChessBoard extends Pane {
     private Timer timer;
 
     public ChessBoard(StatusBar newStatusBar) {
-        // initalize the board: background, data structures, inital layout of
-        // pieces
         statusBar = newStatusBar;
         statusBar.whitePlayerAlert.setText("White Player turn");
         statusBar.blackPlayerAlert.setText("");

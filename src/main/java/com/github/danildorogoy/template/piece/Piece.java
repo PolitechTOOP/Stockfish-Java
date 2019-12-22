@@ -103,7 +103,8 @@ public abstract class Piece extends Group {
                 chessBoard.getPiece(x, y).capture(chessBoard);
             chessBoard.setBoard(x, y, this.type);
             chessBoard.setPiece(x, y, this);
-            if (this.name == "Pawn" && ((this.type == 1 && this.yPos == 0) || (this.type == 2 && this.yPos == 7))) {
+            if (this.name.equals("Pawn") && ((this.type == 1 && this.yPos == 0) ||
+                    (this.type == 2 && this.yPos == 7))) {
                 chessBoard.createPromotePiece(this);
                 if (this.type == 1)
                     chessBoard.playerOnePawn--;
@@ -146,30 +147,30 @@ public abstract class Piece extends Group {
     // Capture method: When a piece is captured by another one
     public void capture(ChessBoard chessBoard) {
         if (this.type == 1) {
-            if (this.name == "Rook")
+            if (this.name.equals("Rook"))
                 chessBoard.playerOneRook--;
-            else if (this.name == "Knight")
+            else if (this.name.equals("Knight"))
                 chessBoard.playerOneKnight--;
-            else if (this.name == "Queen")
+            else if (this.name.equals("Queen"))
                 chessBoard.playerOneQueen--;
-            else if (this.name == "Pawn")
+            else if (this.name.equals("Pawn"))
                 chessBoard.playerOnePawn--;
-            else if (this.name == "Bishop" && (this.xPos + this.yPos) % 2 != 0)
+            else if (this.name.equals("Bishop") && (this.xPos + this.yPos) % 2 != 0)
                 chessBoard.playerOneBishopDarkSquare--;
-            else if (this.name == "Bishop" && (this.xPos + this.yPos) % 2 == 0)
+            else if (this.name.equals("Bishop") && (this.xPos + this.yPos) % 2 == 0)
                 chessBoard.playerOneBishopLightSquare--;
         } else {
-            if (this.name == "Rook")
+            if (this.name.equals("Rook"))
                 chessBoard.playerTwoRook--;
-            else if (this.name == "Knight")
+            else if (this.name.equals("Knight"))
                 chessBoard.playerTwoKnight--;
-            else if (this.name == "Queen")
+            else if (this.name.equals("Queen"))
                 chessBoard.playerTwoQueen--;
-            else if (this.name == "Pawn")
+            else if (this.name.equals("Pawn"))
                 chessBoard.playerTwoPawn--;
-            else if (this.name == "Bishop" && (this.xPos + this.yPos) % 2 == 0)
+            else if (this.name.equals("Bishop") && (this.xPos + this.yPos) % 2 == 0)
                 chessBoard.playerTwoBishopLightSquare--;
-            else if (this.name == "Bishop" && (this.xPos + this.yPos) % 2 != 0)
+            else if (this.name.equals("Bishop") && (this.xPos + this.yPos) % 2 != 0)
                 chessBoard.playerTwoBishopDarkSquare--;
         }
         chessBoard.getChildren().remove(this.getImage());
