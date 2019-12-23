@@ -24,10 +24,12 @@ public class Timer {
         public void handle(ActionEvent event) {
             if (playerTurn == 1 && !timeIsOver && !chessboard.checkmate && !chessboard.stalemate) {
                 whiteTimer -= 1;
-                chessboard.getStatusBar().whitePlayerTimer.setText("White timer: " + TimeUnit.SECONDS.toMinutes(whiteTimer) + ":" + (whiteTimer % 60));
+                chessboard.getStatusBar().whitePlayerTimer.setText("White timer: " +
+                        TimeUnit.SECONDS.toMinutes(whiteTimer) + ":" + (whiteTimer % 60));
             } else if (playerTurn == 2 && !timeIsOver) {
                 blackTimer -= 1;
-                chessboard.getStatusBar().blackPlayerTimer.setText("Black timer: " + TimeUnit.SECONDS.toMinutes(blackTimer) + ":" + (blackTimer % 60));
+                chessboard.getStatusBar().blackPlayerTimer.setText("Black timer: " +
+                        TimeUnit.SECONDS.toMinutes(blackTimer) + ":" + (blackTimer % 60));
             }
             if (!timeIsOver && (whiteTimer == 0 || blackTimer == 0)) {
                 chessboard.timerOver(playerTurn);

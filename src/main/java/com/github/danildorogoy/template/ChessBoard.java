@@ -2,9 +2,9 @@ package com.github.danildorogoy.template;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
+
 import javafx.animation.Timeline;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -15,9 +15,89 @@ import javafx.scene.shape.Rectangle;
 
 public class ChessBoard extends Pane {
 
+
+	// private fields
+	private int boardWidth = 8;
+	private int boardHeight = 8;
+	private int[][] board;
+
+	private Piece[][] pieces;
+	private Window[][] windows;
+
+	// pieceName_color_number
+	private PieceRook rook_2_1;
+	private PieceKnight knight_2_1;
+	private PieceBishop bishop_2_1;
+	private PieceQueen queen_2;
+	private PieceKing king_2;
+	private PieceBishop bishop_2_2;
+	private PieceKnight knight_2_2;
+	private PieceRook rook_2_2;
+	private PiecePawn pawn_2_1;
+	private PiecePawn pawn_2_2;
+	private PiecePawn pawn_2_3;
+	private PiecePawn pawn_2_4;
+	private PiecePawn pawn_2_5;
+	private PiecePawn pawn_2_6;
+	private PiecePawn pawn_2_7;
+	private PiecePawn pawn_2_8;
+
+	private PieceRook rook_1_1;
+	private PieceKnight knight_1_1;
+	private PieceBishop bishop_1_1;
+	private PieceQueen queen_1;
+	private PieceKing king_1;
+	private PieceBishop bishop_1_2;
+	private PieceKnight knight_1_2;
+	private PieceRook rook_1_2;
+	private PiecePawn pawn_1_1;
+	private PiecePawn pawn_1_2;
+	private PiecePawn pawn_1_3;
+	private PiecePawn pawn_1_4;
+	private PiecePawn pawn_1_5;
+	private PiecePawn pawn_1_6;
+	private PiecePawn pawn_1_7;
+	private PiecePawn pawn_1_8;
+
+	private Piece selectedPiece = null;
+
+	private StatusBar statusBar = null;
+
+	// GameLogic linked variable
+	private GameLogic gameLogic = new GameLogic();
+	public List<Piece> checkPieces = new ArrayList<Piece>();
+	public List<Piece> saviorPieces = new ArrayList<Piece>();
+	public int	playerOneRook = 2;
+	public int	playerOneBishopLightSquare = 1;
+	public int	playerOneBishopDarkSquare = 1;
+	public int	playerOneKnight = 2;
+	public int	playerOneQueen = 1;
+	public int	playerOnePawn = 8;
+	public int	playerTwoRook = 2;
+	public int	playerTwoBishopLightSquare = 1;
+	public int	playerTwoBishopDarkSquare = 1;
+	public int	playerTwoKnight = 2;
+	public int	playerTwoQueen = 1;
+	public int	playerTwoPawn = 8;
+	private Alert alert;
+
+	private Rectangle background;
+	private double cell_width;
+	private double cell_height;
+	private int current_player;
+	private boolean isBlack = false;
+	public boolean checkmate = false;
+	public boolean checkState = false;
+	public boolean stalemate = false;
+
+	private final int EMPTY = 0;
+	private final int PlayerWhite = 1;
+	private final int PlayerBlack = 2;
+
+	private Timer timer;
+
 	public ChessBoard(StatusBar newStatusBar) {
-		// initalize the board: background, data structures, inital layout of
-		// pieces
+
 		statusBar = newStatusBar;
 		statusBar.whitePlayerAlert.setText("White Player turn");
 		statusBar.blackPlayerAlert.setText("");
@@ -38,8 +118,6 @@ public class ChessBoard extends Pane {
 		// initialize windows array to the correct size
 		windows = new Window[boardWidth][boardHeight];
 
-		// for loop to populate all arrays to default values and add the windows
-		// to the board
 		for (int i = 0; i < 8; i++) {
 			if(i%2 == 0 || i ==0){
 				isBlack =false;
@@ -166,7 +244,8 @@ public class ChessBoard extends Pane {
 		}
 
 		for(int i = 0; i < 8; i++){
-			getChildren().addAll(pieces[i][0].getImage(), pieces[i][1].getImage(), pieces[i][6].getImage(), pieces[i][7].getImage());
+			getChildren().addAll(pieces[i][0].getImage(), pieces[i][1].getImage(),
+					pieces[i][6].getImage(), pieces[i][7].getImage());
 		}
 	}
 
@@ -180,14 +259,10 @@ public class ChessBoard extends Pane {
 		background.setWidth(width);
 		background.setHeight(height);
 
-		// calculate the width and height of a cell in which a windows and a
-		// piece will sit
 		cell_width = width / 8.0;
 		cell_height = height / 8.0;
 
-		// nested for loop to reset the sizes and positions of all pieces that
-		// were already placed
-		// and update the position of the windows in the board
+
 		for (int i = 0; i < 8; i++) {
 			for (int j = 0; j < 8; j++) {
 				if (board[i][j] != 0) {
@@ -291,9 +366,8 @@ public class ChessBoard extends Pane {
 			current_player = PlayerBlack;
 			statusBar.whitePlayerAlert.setText("");
 			checkState = false;
-			for(Iterator<Piece> piece = saviorPieces.iterator(); piece.hasNext(); ) {
-			    Piece item = piece.next();
-			    item.isASavior = false;
+			for (Piece item : saviorPieces) {
+				item.isASavior = false;
 			}
 			if (gameLogic.isCheck(this, king_2.xPos, king_2.yPos, current_player, true))
 			{
@@ -320,9 +394,8 @@ public class ChessBoard extends Pane {
 			current_player = PlayerWhite;
 			statusBar.blackPlayerAlert.setText("");
 			checkState = false;
-			for(Iterator<Piece> piece = saviorPieces.iterator(); piece.hasNext(); ) {
-			    Piece item = piece.next();
-			    item.isASavior = false;
+			for (Piece item : saviorPieces) {
+				item.isASavior = false;
 			}
 			if (gameLogic.isCheck(this, king_1.xPos, king_1.yPos, current_player, true))
 			{
@@ -493,84 +566,4 @@ public class ChessBoard extends Pane {
 	{
 		return (statusBar);
 	}
-	
-		// private fields
-	private int boardWidth = 8;
-	private int boardHeight = 8;
-	private int[][] board;
-
-	private Piece[][] pieces;
-	private Window[][] windows;
-
-	// pieceName_color_number
-	private PieceRook rook_2_1; 
-	private PieceKnight knight_2_1;
-	private PieceBishop bishop_2_1;
-	private PieceQueen queen_2; 
-	private PieceKing king_2; 
-	private PieceBishop bishop_2_2;
-	private PieceKnight knight_2_2;
-	private PieceRook rook_2_2;
-	private PiecePawn pawn_2_1;
-	private PiecePawn pawn_2_2;
-	private PiecePawn pawn_2_3;
-	private PiecePawn pawn_2_4;
-	private PiecePawn pawn_2_5;
-	private PiecePawn pawn_2_6;
-	private PiecePawn pawn_2_7;
-	private PiecePawn pawn_2_8;
-	
-	private PieceRook rook_1_1; 
-	private PieceKnight knight_1_1;
-	private PieceBishop bishop_1_1;
-	private PieceQueen queen_1; 
-	private PieceKing king_1; 
-	private PieceBishop bishop_1_2;
-	private PieceKnight knight_1_2;
-	private PieceRook rook_1_2;
-	private PiecePawn pawn_1_1;
-	private PiecePawn pawn_1_2;
-	private PiecePawn pawn_1_3;
-	private PiecePawn pawn_1_4;
-	private PiecePawn pawn_1_5;
-	private PiecePawn pawn_1_6;
-	private PiecePawn pawn_1_7;
-	private PiecePawn pawn_1_8;
-		
-	private Piece selectedPiece = null;
-
-	private StatusBar statusBar = null;
-	
-	// GameLogic linked variable
-	private GameLogic gameLogic = new GameLogic();
-	public List<Piece> checkPieces = new ArrayList<Piece>();
-	public List<Piece> saviorPieces = new ArrayList<Piece>();
-	public int	playerOneRook = 2;
-	public int	playerOneBishopLightSquare = 1;
-	public int	playerOneBishopDarkSquare = 1;
-	public int	playerOneKnight = 2;
-	public int	playerOneQueen = 1;
-	public int	playerOnePawn = 8;
-	public int	playerTwoRook = 2;
-	public int	playerTwoBishopLightSquare = 1;
-	public int	playerTwoBishopDarkSquare = 1;
-	public int	playerTwoKnight = 2;
-	public int	playerTwoQueen = 1;
-	public int	playerTwoPawn = 8;
-	private Alert alert;
-		
-	private Rectangle background;
-	private double cell_width;
-	private double cell_height;
-	private int current_player;
-	private boolean isBlack = false; 
-	public boolean checkmate = false;
-	public boolean checkState = false;
-	public boolean stalemate = false;
-	
-	private final int EMPTY = 0;
-	private final int PlayerWhite = 1;
-	private final int PlayerBlack = 2;
-	
-	private Timer timer;
 }

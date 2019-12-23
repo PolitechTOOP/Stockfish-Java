@@ -100,7 +100,8 @@ public abstract class Piece extends Group {
                 chessBoard.getPiece(x, y).capture(chessBoard);
             chessBoard.setBoard(x, y, this.type);
             chessBoard.setPiece(x, y, this);
-            if (this.name == "Pawn" && ((this.type == 1 && this.yPos == 0) || (this.type == 2 && this.yPos == 7))) {
+            if (this.name.equals("Pawn") && ((this.type == 1 && this.yPos == 0) ||
+                    (this.type == 2 && this.yPos == 7))) {
                 chessBoard.createPromotePiece(this);
                 if (this.type == 1)
                     chessBoard.playerOnePawn--;
@@ -110,7 +111,6 @@ public abstract class Piece extends Group {
         }
     }
 
-    // Return the image of the piece
     public ImageView getImage() {
         return (imageView);
     }
@@ -118,18 +118,14 @@ public abstract class Piece extends Group {
     public void centerImage() {
         Image img = imageView.getImage();
         if (img != null) {
-            double w = 0;
-            double h = 0;
+            double w;
+            double h;
 
             double ratioX = imageView.getFitWidth() / img.getWidth();
             double ratioY = imageView.getFitHeight() / img.getHeight();
 
-            double reducCoeff = 0;
-            if (ratioX >= ratioY) {
-                reducCoeff = ratioY;
-            } else {
-                reducCoeff = ratioX;
-            }
+            double reducCoeff;
+            reducCoeff = Math.min(ratioX, ratioY);
 
             w = img.getWidth() * reducCoeff;
             h = img.getHeight() * reducCoeff;
@@ -143,31 +139,33 @@ public abstract class Piece extends Group {
     // Capture method: When a piece is captured by another one
     public void capture(ChessBoard chessBoard) {
         if (this.type == 1) {
-            if (this.name == "Rook")
+            if (this.name.equals("Rook")) {
                 chessBoard.playerOneRook--;
-            else if (this.name == "Knight")
+            } else if (this.name.equals("Knight")) {
                 chessBoard.playerOneKnight--;
-            else if (this.name == "Queen")
+            } else if (this.name.equals("Queen")) {
                 chessBoard.playerOneQueen--;
-            else if (this.name == "Pawn")
+            } else if (this.name.equals("Pawn")) {
                 chessBoard.playerOnePawn--;
-            else if (this.name == "Bishop" && (this.xPos + this.yPos) % 2 != 0)
+            } else if (this.name.equals("Bishop") && (this.xPos + this.yPos) % 2 != 0) {
                 chessBoard.playerOneBishopDarkSquare--;
-            else if (this.name == "Bishop" && (this.xPos + this.yPos) % 2 == 0)
+            } else if (this.name.equals("Bishop") && (this.xPos + this.yPos) % 2 == 0) {
                 chessBoard.playerOneBishopLightSquare--;
+            }
         } else {
-            if (this.name == "Rook")
+            if (this.name.equals("Rook")) {
                 chessBoard.playerTwoRook--;
-            else if (this.name == "Knight")
+            } else if (this.name.equals("Knight")) {
                 chessBoard.playerTwoKnight--;
-            else if (this.name == "Queen")
+            } else if (this.name.equals("Queen")) {
                 chessBoard.playerTwoQueen--;
-            else if (this.name == "Pawn")
+            } else if (this.name.equals("Pawn")) {
                 chessBoard.playerTwoPawn--;
-            else if (this.name == "Bishop" && (this.xPos + this.yPos) % 2 == 0)
+            } else if (this.name.equals("Bishop") && (this.xPos + this.yPos) % 2 == 0) {
                 chessBoard.playerTwoBishopLightSquare--;
-            else if (this.name == "Bishop" && (this.xPos + this.yPos) % 2 != 0)
+            } else if (this.name.equals("Bishop") && (this.xPos + this.yPos) % 2 != 0) {
                 chessBoard.playerTwoBishopDarkSquare--;
+            }
         }
         chessBoard.getChildren().remove(this.getImage());
     }
@@ -201,13 +199,35 @@ public abstract class Piece extends Group {
         this.isFirstTime = isFirstTime;
     }
 
-    public int getX() {
-        return this.xPos;
+    public int getType() {
+        return type;
     }
 
-    public int getY() {
-        return this.yPos;
+    public int getxPos() {
+        return xPos;
     }
 
+    public int getyPos() {
+        return yPos;
+    }
 
+    public String getName() {
+        return name;
+    }
+
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    public Translate getPos() {
+        return pos;
+    }
+
+    public GameLogic getGameLogic() {
+        return gameLogic;
+    }
+
+    public boolean isASavior() {
+        return isASavior;
+    }
 }

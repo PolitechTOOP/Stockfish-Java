@@ -6,7 +6,6 @@ import javafx.scene.image.ImageView;
 public class PieceQueen extends Piece {
 
     private Image image;
-//	private ImageView imageView = new ImageView(); 
 
     public PieceQueen(int type, int xPos, int yPos) {
         super(type, xPos, yPos);
@@ -14,21 +13,15 @@ public class PieceQueen extends Piece {
         // TODO Auto-generated constructor stub
         if (type == 1) {
             image = new Image("file:src/main/resources/wQueen.png");
-            imageView.setImage(image);
-            imageView.fitHeightProperty();
-            imageView.fitWidthProperty();
-            imageView.setPreserveRatio(true);
-            imageView.setSmooth(true);
-            imageView.setCache(true);
         } else {
             image = new Image("file:src/main/resources/bQueen.png");
-            imageView.setImage(image);
-            imageView.fitHeightProperty();
-            imageView.fitWidthProperty();
-            imageView.setPreserveRatio(true);
-            imageView.setSmooth(true);
-            imageView.setCache(true);
         }
+        imageView.setImage(image);
+        imageView.fitHeightProperty();
+        imageView.fitWidthProperty();
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
     }
 
     @Override
@@ -43,8 +36,11 @@ public class PieceQueen extends Piece {
         int y = this.yPos + 1;
         if (chessBoard.checkState && !this.isASavior)
             return;
-        if (!gameLogic.slashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type) && !gameLogic.verticalProtection(chessBoard, this.xPos, this.yPos, this.type) && !gameLogic.horizontalProtection(chessBoard, this.xPos, this.yPos, this.type)) {
-            for (int x = this.xPos + 1; x < chessBoard.getBoardWidth() && y < chessBoard.getBoardHeight(); x++, y++) {
+        if (!gameLogic.slashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type) &&
+                !gameLogic.verticalProtection(chessBoard, this.xPos, this.yPos, this.type) &&
+                !gameLogic.horizontalProtection(chessBoard, this.xPos, this.yPos, this.type)) {
+            for (int x = this.xPos + 1; x < chessBoard.getBoardWidth() &&
+                    y < chessBoard.getBoardHeight(); x++, y++) {
                 if (chessBoard.getBoardPosition(x, y) == 0) {
                     if (chessBoard.checkState) {
                         if (gameLogic.isThisProtecting(chessBoard, x, y, this.type))
@@ -82,7 +78,9 @@ public class PieceQueen extends Piece {
                 }
             }
         }
-        if (!gameLogic.backslashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type) && !gameLogic.verticalProtection(chessBoard, this.xPos, this.yPos, this.type) && !gameLogic.horizontalProtection(chessBoard, this.xPos, this.yPos, this.type)) {
+        if (!gameLogic.backslashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type) &&
+                !gameLogic.verticalProtection(chessBoard, this.xPos, this.yPos, this.type) &&
+                !gameLogic.horizontalProtection(chessBoard, this.xPos, this.yPos, this.type)) {
             y = this.yPos + 1;
             for (int x = this.xPos - 1; x >= 0 && y < chessBoard.getBoardHeight(); x--, y++) {
                 if (chessBoard.getBoardPosition(x, y) == 0) {
@@ -123,7 +121,9 @@ public class PieceQueen extends Piece {
             }
         }
         // Rook ability
-        if (!gameLogic.horizontalProtection(chessBoard, this.xPos, this.yPos, this.type) && !gameLogic.slashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type) && !gameLogic.backslashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type)) {
+        if (!gameLogic.horizontalProtection(chessBoard, this.xPos, this.yPos, this.type) &&
+                !gameLogic.slashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type) &&
+                !gameLogic.backslashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type)) {
             for (y = this.yPos - 1; y >= 0; y--) {
                 if (chessBoard.getBoardPosition(this.xPos, y) == 0) {
                     if (chessBoard.checkState) {
@@ -161,7 +161,9 @@ public class PieceQueen extends Piece {
                 }
             }
         }
-        if (!gameLogic.verticalProtection(chessBoard, this.xPos, this.yPos, this.type) && !gameLogic.slashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type) && !gameLogic.backslashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type)) {
+        if (!gameLogic.verticalProtection(chessBoard, this.xPos, this.yPos, this.type) &&
+                !gameLogic.slashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type) &&
+                !gameLogic.backslashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type)) {
             for (int x = this.xPos - 1; x >= 0; x--) {
                 if (chessBoard.getBoardPosition(x, this.yPos) == 0) {
                     if (chessBoard.checkState) {

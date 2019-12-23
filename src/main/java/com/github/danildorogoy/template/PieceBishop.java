@@ -5,36 +5,23 @@ import javafx.scene.image.ImageView;
 
 public class PieceBishop extends Piece {
 
-    //	private int xPos;
-//	private int yPos;
-//	private int type;
     private Image image;
-//	private ImageView imageView = new ImageView();
 
     public PieceBishop(int type, int xPos, int yPos) {
         super(type, xPos, yPos);
         name = "Bishop";
-//		this.type = type;
-//		this.xPos = xPos;
-//		this.yPos = yPos;
         // TODO Auto-generated constructor stub
         if (type == 1) {
             image = new Image("file:src/main/resources/wBishop.png");
-            imageView.setImage(image);
-            imageView.fitHeightProperty();
-            imageView.fitWidthProperty();
-            imageView.setPreserveRatio(true);
-            imageView.setSmooth(true);
-            imageView.setCache(true);
         } else {
             image = new Image("file:src/main/resources/bBishop.png");
-            imageView.setImage(image);
-            imageView.fitHeightProperty();
-            imageView.fitWidthProperty();
-            imageView.setPreserveRatio(true);
-            imageView.setSmooth(true);
-            imageView.setCache(true);
         }
+        imageView.setImage(image);
+        imageView.fitHeightProperty();
+        imageView.fitWidthProperty();
+        imageView.setPreserveRatio(true);
+        imageView.setSmooth(true);
+        imageView.setCache(true);
     }
 
     @Override
@@ -48,7 +35,8 @@ public class PieceBishop extends Piece {
         chessBoard.colorSquare(this.xPos, this.yPos, true);
         if (chessBoard.checkState && !this.isASavior)
             return;
-        if (gameLogic.horizontalProtection(chessBoard, this.xPos, this.yPos, this.type) || gameLogic.verticalProtection(chessBoard, this.xPos, this.yPos, this.type))
+        if (gameLogic.horizontalProtection(chessBoard, this.xPos, this.yPos, this.type) ||
+                gameLogic.verticalProtection(chessBoard, this.xPos, this.yPos, this.type))
             return;
         if (!gameLogic.slashDiagonalProtection(chessBoard, this.xPos, this.yPos, this.type)) {
             for (int x = this.xPos + 1; x < chessBoard.getBoardWidth() && y < chessBoard.getBoardHeight(); x++, y++) {

@@ -49,7 +49,8 @@ public class StatusBar extends HBox {
         statusBarGp.setHgap(10);
         statusBarGp.setPadding(new Insets(10, 10, 10, 10));
 
-        statusBarGp.setStyle("-fx-background-color: burlyWood; -fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 75, 0.5, 0, 10);");
+        statusBarGp.setStyle("-fx-background-color: burlyWood; " +
+                "-fx-effect: innershadow(gaussian, rgba(0,0,0,0.4), 75, 0.5, 0, 10);");
         statusBarGp.setSnapToPixel(false);
         getChildren().add(statusBarGp);
     }
@@ -72,7 +73,4 @@ public class StatusBar extends HBox {
         return resetButton;
     }
 
-    public void setResetButton(Button resetButton) {
-        this.resetButton = resetButton;
-    }
 }
