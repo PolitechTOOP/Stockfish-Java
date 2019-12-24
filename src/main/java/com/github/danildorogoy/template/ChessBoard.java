@@ -356,11 +356,8 @@ public class ChessBoard extends Pane {
 		int indexX = (int) (x/ cell_width);
 		int indexY = (int) (y/ cell_height);
 		
-		// add a condition to know if the player can put his piece there
 		selectedPiece.MovePiece(this, indexX, indexY);
-		// change isFirstTime (pas beau, il faudrait le faire qu'une fois) 
 		selectedPiece.setFirstTime(false);
-		// don't forget to change the player
 		if (current_player == PlayerWhite)
 		{
 			current_player = PlayerBlack;

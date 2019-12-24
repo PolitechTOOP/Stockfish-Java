@@ -10,7 +10,6 @@ public class PieceKnight extends Piece {
     public PieceKnight(int type, int xPos, int yPos) {
         super(type, xPos, yPos);
         name = "Knight";
-        // TODO Auto-generated constructor stub
         if (type == 1) {
             image = new Image("file:src/main/resources/wKnight.png");
         } else {

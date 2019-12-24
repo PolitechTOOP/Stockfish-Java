@@ -10,7 +10,6 @@ public class PieceBishop extends Piece {
     public PieceBishop(int type, int xPos, int yPos) {
         super(type, xPos, yPos);
         name = "Bishop";
-        // TODO Auto-generated constructor stub
         if (type == 1) {
             image = new Image("file:src/main/resources/wBishop.png");
         } else {

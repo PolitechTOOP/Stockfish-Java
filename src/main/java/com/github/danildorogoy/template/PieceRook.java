@@ -10,7 +10,6 @@ public class PieceRook extends Piece {
     public PieceRook(int type, int xPos, int yPos) {
         super(type, xPos, yPos);
         name = "Rook";
-        // TODO Auto-generated constructor stub
         if (type == 1) {
             image = new Image("file:src/main/resources/wRook.png");
         } else {

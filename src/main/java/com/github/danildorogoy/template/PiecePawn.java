@@ -10,7 +10,6 @@ public class PiecePawn extends Piece {
     public PiecePawn(int type, int xPos, int yPos) {
         super(type, xPos, yPos);
         name = "Pawn";
-        // TODO Auto-generated constructor stub
         if (type == 1) {
             image = new Image("file:src/main/resources/wPawn.png");
         } else {

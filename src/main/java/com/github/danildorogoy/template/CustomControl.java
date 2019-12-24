@@ -18,18 +18,15 @@ public class CustomControl extends Control {
 		getChildren().addAll(statusBar, chessBoard);
 		
 		setOnMouseClicked(event -> {
-			// TODO Auto-generated method stub
 			chessBoard.selectPiece(event.getX(), event.getY() - (statusBarSize / 2));
 		});
 
-		// Add a key listener that will reset the game
 		setOnKeyPressed(event -> {
 			if (event.getCode() == KeyCode.SPACE)
 				chessBoard.resetGame();
 		});
 		
 		statusBar.getResetButton().setOnAction(event -> {
-			// TODO Auto-generated method stub
 			chessBoard.resetGame();
 		});
 	}
