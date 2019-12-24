@@ -24,15 +24,10 @@ public abstract class Piece extends Group {
 	 * Name of the piece
 	 */
     protected String name;
-    // ImageView
     protected ImageView imageView = new ImageView();
-    // Position
     protected Translate pos;
-    // GameLogic
     protected GameLogic gameLogic = new GameLogic();
-    // True if it's the first time that the Piece is used.
     protected boolean isFirstTime;
-    // Variable to know if the piece can move in a check situation
     protected boolean isASavior = false;
 
     public Piece(int type, int xPos, int yPos) {
@@ -42,13 +37,9 @@ public abstract class Piece extends Group {
         isFirstTime = true;
     }
 
-    // Select method: When a piece is selected by a first click
-    // Highlight all the available position where the piece can go
     public void SelectPiece(ChessBoard board) {
     }
 
-    // Move method: When a piece is already selected and that the player click on a highlighted position
-    // Change the position of the piece and update the board
     public void MovePiece(ChessBoard chessBoard, int x, int y) {
         chessBoard.setBoard(this.xPos, this.yPos, 0);
         chessBoard.setPiece(this.xPos, this.yPos, null);
@@ -136,7 +127,6 @@ public abstract class Piece extends Group {
         }
     }
 
-    // Capture method: When a piece is captured by another one
     public void capture(ChessBoard chessBoard) {
         if (this.type == 1) {
             if (this.name.equals("Rook")) {
@@ -179,7 +169,6 @@ public abstract class Piece extends Group {
         imageView.setFitHeight(height);
     }
 
-    // overridden version of the relocate method
     public void relocate(double x, double y) {
         imageView.setTranslateX(x);
         imageView.setTranslateY(y);

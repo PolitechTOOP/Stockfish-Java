@@ -14,6 +14,14 @@ import javafx.scene.layout.RowConstraints;
 public class StatusBar extends HBox {
 
 
+    private Button resetButton;
+    public Label whitePlayerAlert;
+    public Label blackPlayerAlert;
+    public Label whitePlayerTimer;
+    public Label blackPlayerTimer;
+    public Label winner;
+    private GridPane statusBarGp;
+
     public StatusBar() {
         statusBarGp = new GridPane();
         resetButton = new Button("Reset");
@@ -23,7 +31,6 @@ public class StatusBar extends HBox {
         blackPlayerTimer = new Label("");
         winner = new Label("");
 
-//	    statusBarGp.setGridLinesVisible(true);
         ColumnConstraints column = new ColumnConstraints();
         column.setPercentWidth(30);
         statusBarGp.getColumnConstraints().add(column);
@@ -60,14 +67,6 @@ public class StatusBar extends HBox {
         setWidth(width);
         setHeight(height);
     }
-
-    private Button resetButton;
-    public Label whitePlayerAlert;
-    public Label blackPlayerAlert;
-    public Label whitePlayerTimer;
-    public Label blackPlayerTimer;
-    public Label winner;
-    private GridPane statusBarGp;
 
     public Button getResetButton() {
         return resetButton;
