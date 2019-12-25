@@ -41,7 +41,7 @@ public class PieceKing extends Piece {
                         x < chessBoard.getBoardWidth() && chessBoard.getBoardPosition(x, y) != this.type) {
                     if (!chessBoard.checkState)
                         this.canCastle(chessBoard);
-                    // Check si echec et mat sur cette case
+                    // Check if checkmate in this field
                     if (!gameLogic.isCheck(chessBoard, x, y, this.type, true))
                         chessBoard.colorSquare(x, y, false);
                 }
